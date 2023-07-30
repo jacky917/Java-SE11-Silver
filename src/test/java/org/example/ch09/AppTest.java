@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -222,6 +223,38 @@ public class AppTest
                 return false;
             }
         });
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2023/07/28
+     * 最後一次查看：2023/07/28
+     * 題目考點：長度不可變的 List
+     * 需要補足知識：List.of Arrays.asList 差別
+     * 複習：查看總結
+     * 總結：
+     * List.of Arrays.asList 差別
+     * 1.長度都不可變
+     * 2.List.of Java 9 才被引入
+     * 3.List.of 不僅長度不可變，值也不可變
+     * 4.Arrays.asList可變更值
+     */
+    public void test_q14() {
+        List<Integer> list1 = List.of(1, 2, 3);
+        List<Integer> list2 = Arrays.asList(new Integer[] {1,2,3});
+        List<Integer> list3 = Arrays.asList(1,2,3);
+        System.out.println(list1);
+        System.out.println(list2);
+        System.out.println(list3);
+        System.out.println("------------------");
+        // java.lang.UnsupportedOperationException
+        // list1.set(0,99);
+        list2.set(0,99);
+        list3.set(0,99);
+        System.out.println(list1);
+        System.out.println(list2);
+        System.out.println(list3);
+        System.out.println("------------------");
     }
 
     /**

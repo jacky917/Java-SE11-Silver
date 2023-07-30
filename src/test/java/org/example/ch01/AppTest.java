@@ -38,7 +38,7 @@ public class AppTest
      * 最後一次查看：2023/07/18
      * 題目考點：main 入口
      * 需要補足知識：main 入口參數可以用 String[] 和 String... 表示
-     * 複習：查看總結
+     * 複習：查看總結 q05
      * 總結：
      * 1.main 入口參數可以用 String[] 和 String... 表示
      * 2.一つのソースファイルに複数記述できる　❌

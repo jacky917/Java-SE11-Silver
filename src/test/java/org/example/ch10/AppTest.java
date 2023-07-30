@@ -128,6 +128,7 @@ public class AppTest
      *   -> 引用數據類型會有影響
      *   -> 基本數據類型不會有影響
      * 3.一個 try 最多只能有一個 finally（#08）
+     * 4.finally 中如果有返回，將會覆蓋返回值
      */
     public void test_q07() {
     }
@@ -214,7 +215,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/24
-     * 最後一次查看：2023/07/24
+     * 最後一次查看：2023/07/28
      * 題目考點：Exception 的繼承關係
      * 需要補足知識：Exception 的繼承關係
      * 複習：查看 q11
@@ -266,7 +267,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/24
-     * 最後一次查看：2023/07/24
+     * 最後一次查看：2023/07/28
      * 題目考點：各種越界異常
      * 需要補足知識：各種越界異常
      * 複習：查看以下代碼
@@ -279,10 +280,10 @@ public class AppTest
     public void test_q14() {
 
         // IndexOutOfBoundsException（集合類越界，例如ArrayList或LinkedList等）
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("test");
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        arrayList2.add("test");
         try {
-            String element = arrayList.get(10);  // 超出索引範圍
+            String element = arrayList2.get(10);  // 超出索引範圍
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }

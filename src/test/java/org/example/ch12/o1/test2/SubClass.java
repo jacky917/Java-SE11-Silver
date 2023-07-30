@@ -2,6 +2,7 @@ package org.example.ch12.o1.test2;
 
 
 class Parent {
+
     /* 静态变量 */
     public static String p_StaticField = "父类--静态变量";
     /* 变量 */
@@ -12,12 +13,24 @@ class Parent {
     static {
         System.out.println( p_StaticField );
         System.out.println( "父类--静态初始化块" );
+        // 報錯，同樣是靜態的情況下，執行順序按照代碼順序
+        // System.out.println( p_StaticField2 );
+        // System.out.println( "父类--静态初始化块2" );
     }
     /* 初始化块 */
     {
         System.out.println( p_Field );
         System.out.println( "父类--初始化块" );
+        // 報錯，原因同靜態的情況
+        // System.out.println( p_Field2 );
+        // System.out.println( "父类--初始化块2" );
     }
+
+    /* 静态变量 */
+    public static String p_StaticField2 = "父类--静态变量2";
+    /* 变量 */
+    public String    p_Field2 = "父类--变量2";
+
     /* 构造器 */
     public Parent()
     {

@@ -6,6 +6,7 @@ public class Main {
     }
     private static int sample() {
         try {
+//            return 5;
             throw new RuntimeException();
         } catch (RuntimeException e) {
             return 10;
