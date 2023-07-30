@@ -39,7 +39,7 @@ public class AppTest
      * 題目考點：Unreachable statement
      * 需要補足知識：Unreachable statement
      * 複習：查看以下代碼
-     * 總結：不可到達的代碼是編譯錯誤
+     * 總結：存在不可到達的代碼，會引發編譯錯誤
      */
     public void test_q15() {
         return;
