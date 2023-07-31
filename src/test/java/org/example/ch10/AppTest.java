@@ -93,8 +93,8 @@ public class AppTest
      * 需要補足知識：obj.toString()
      * 複習：查看 q05
      * 總結：
-     * 1.System.out.println(obj) 有對於 null 的處理，
-     *   如果對象為 null，obj.toString() 會直接拋出異常
+     * 1.System.out.println(obj) 有對 null 處理，不會空指針
+     *   如果 obj 為 null，obj.toString() 會直接拋出異常
      * －－－－－－－－－－－－－－－－
      * TODO 補充 深入瞭解 System.out.println(obj) 和 System.out.println(obj.toString()) 的差別
      * PrintStream 了解

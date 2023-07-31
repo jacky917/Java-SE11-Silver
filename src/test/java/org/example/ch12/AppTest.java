@@ -270,7 +270,7 @@ public class AppTest
      * 擴展知識：
      * 1.Character 有 0~127 的緩存（Unicode編碼）範圍是 ASCII
      * 2.Character 要使用緩存必須使用自動裝箱，不能使用 new 關鍵字
-     * Character ch = 'a'
+     *   Character ch = 'a'
      * 3.Character 沒有類似 String intern 的方法
      */
     public void test_q8() {
@@ -323,7 +323,7 @@ public class AppTest
         System.out.println("-----擴展知識2-----");
         Character ch = 'a';  // 自動裝箱
         char c = ch;  // 自動拆箱
-        System.out.println(ch == c);
+        System.out.println(ch == c); // true
 
         System.out.println("-----擴展知識3-----");
         String s1 = new String("test");
@@ -331,11 +331,11 @@ public class AppTest
         String s3 = "test";
         String s4 = "test";
 
-        System.out.println(s1 == s2);
-        System.out.println(s1.intern() == s2);
-        System.out.println(s1.intern() == s2.intern());
-        System.out.println(s3 == s4);
-        System.out.println(s1.intern() == s3);
+        System.out.println(s1 == s2); // false
+        System.out.println(s1.intern() == s2); // false
+        System.out.println(s1.intern() == s2.intern()); // true
+        System.out.println(s3 == s4); // true
+        System.out.println(s1.intern() == s3); // true
     }
 
     /**
@@ -508,7 +508,7 @@ public class AppTest
      * 2.然而在運行時期，Java虛擬機（JVM）會查看實際的對象類型（這裡是B）來決定應該調用哪個方法。（重寫）
      * -----------補充-----------
      * 3.對於Java來說，沒有像指 "1000.0" 這樣明確定浮點數（double 或 float）類型的語法來直接指定整數（int，byte，short）的類型。
-     * 必須顯示的指定如：(byte)，byte byteValue = 10;
+     *   必須顯示的指定如：(byte) byteValue = 10;
      */
     public void test_q23() {
     }
@@ -523,7 +523,7 @@ public class AppTest
      * 總結：
      * super.sample(); -> IB.super.sample();
      * 1.super 關鍵字用於訪問父類（超類）的方法和屬性。但是在接口的情況下，Java不允許直接使用 super 關鍵字來訪問默認方法，
-     * 因為一個類可能實現了多個接口，而這些接口可能有相同的默認方法，直接使用 super 將引發歧義。所以，Java語言的設計者們選擇禁止這種用法。
+     *   因為一個類可能實現了多個接口，而這些接口可能有相同的默認方法，直接使用 super 將引發歧義。所以，Java語言的設計者們選擇禁止這種用法。
      * 2.哪怕接口中同樣的默認的方法只有一個，也不能直接透過 super 調用
      * -----------補充-----------
      * 1.接口中的 default 不能直接透過類調用，類只能直接調用 static 方法
@@ -650,7 +650,7 @@ public class AppTest
      * 創建日期：2023/07/10
      * 最後一次查看：2023/07/10
      * 題目考點：繼承
-     * 需要補足知識：子類無法通過常規手段訪問父類方法（反射可以）
+     * 需要補足知識：子類無法通過常規手段訪問父類 private 方法（反射可以）
      * 複習：查看 q43
      * 總結：-
      */
@@ -691,32 +691,19 @@ public class AppTest
      * 🌟🌟🌟
      * 創建日期：2023/07/10
      * 最後一次查看：2023/07/10
-     * 題目考點：
-     * 需要補足知識：
-     * 複習：
+     * 題目考點：運算式
+     * 需要補足知識：運算式
+     * 複習：查看 q49
      * 總結：
      * 1. a = b = c = d;
-     * 這種運算式子是由右到左執行
-     * d 賦值給 c，c 賦值給 b，以此類推
+     *   這種運算式子是由右到左執行
+     *   d 賦值給 c，c 賦值給 b，以此類推
      * 2.如果 = 的右邊是變量則取出那個變量的值賦值給左邊，如果是函數則是返回值（無返回值會編譯錯誤）
      */
     public void test_q49() {
         Sample sample = new Sample();
         sample.setAll(10);
         System.out.println(sample);
-    }
-
-    /**
-     * 🌟🌟🌟
-     * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
-     * 題目考點：
-     * 需要補足知識：
-     * 複習：
-     * 總結：
-     */
-    public void test_q52() {
-
     }
 
     /**
@@ -821,8 +808,7 @@ public class AppTest
      * 題目考點：初始化
      * 需要補足知識：初始化
      * 複習：查看以下總結和代碼
-     * 總結：
-     * 1.要打印基本數據類型，需要確保變量有初始化
+     * 總結：要打印基本數據類型，需要確保變量有初始化
      */
     public void test_q63() {
         int x;
@@ -920,6 +906,7 @@ public class AppTest
         Object o = new Object();
         ArrayList<Integer> arr = new ArrayList<>();
         // 編譯器明確知道此處會轉換失敗，所以是編譯錯誤，不是運行異常
+        // Incompatible types. Found: 'java.lang.Object', required: 'java.util.ArrayList<java.lang.Integer>'
         // arr = o;
     }
 

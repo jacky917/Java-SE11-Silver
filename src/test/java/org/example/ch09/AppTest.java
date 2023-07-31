@@ -135,21 +135,8 @@ public class AppTest
         }
     }
 
-    /**
-     * 🌟🌟🌟
-     * 創建日期：2023/07/23
-     * 最後一次查看：2023/07/23
-     * 題目考點：ArrayList remove
-     * 需要補足知識：ArrayList remove
-     * 複習：查看以下代碼
-     * 總結：
-     */
-    public void test_q09() {
-        ArrayList<String> list = new ArrayList<>();
-    }
-
-    private ArrayList<String> getList(){
-        System.out.println("－－－－－－－－－－－－－－－－");
+    private ArrayList<String> getList(String s){
+        System.out.println("－－－－－－－" + s + "－－－－－－－");
         ArrayList<String> list = new ArrayList<>();
         list.add("A");
         list.add("B");
@@ -180,7 +167,7 @@ public class AppTest
      * 7.Collection.removeIf()（版本要求Java 1.8）
      */
     public void test_q12() {
-        ArrayList<String> list = getList();
+        ArrayList<String> list = getList("錯誤寫法");
         for(String str : list) {
             if("B".equals(str)) {
                 list.remove("B");
@@ -188,7 +175,7 @@ public class AppTest
                 System.out.println(str);
             }
         }
-        list = getList();
+        list = getList("增強 for 等效於迭代器模式");
         // 增強 for 等效於迭代器模式
         for (Iterator<String> i = list.iterator(); i.hasNext();) {
             String element = i.next();
@@ -198,7 +185,7 @@ public class AppTest
                 System.out.println(element);
             }
         }
-        list = getList();
+        list = getList("迭代器模式刪除元素，正確寫法");
         // 迭代器模式刪除元素，正確寫法
         for (Iterator<String> i = list.iterator(); i.hasNext();) {
             String element = i.next();
@@ -209,7 +196,7 @@ public class AppTest
                 System.out.println(element);
             }
         }
-        list = getList();
+        list = getList("Collection.removeIf() 方法 移除C + 打印");
         // Collection.removeIf() 方法 移除C + 打印
         list.removeIf(new Predicate<String>() {
             @Override
