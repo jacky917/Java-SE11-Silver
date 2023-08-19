@@ -1,4 +1,4 @@
-package org.example;
+package org.example.test_1Z0816.ch11;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -31,7 +31,6 @@ public class AppTest
     public void testApp() {
         assertTrue(true);
     }
-
 
     /**
      * 🌟🌟🌟
