@@ -9,6 +9,7 @@ public class Sample implements A, D{
         // 'org.example.test_1Z0816.ch01.q11.C' is not an enclosing class
 //        C.super.test();
         D.super.test();
+        D.super.test2();
     }
 
     public static void main(String[] args) {
