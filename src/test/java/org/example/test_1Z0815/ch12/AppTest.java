@@ -453,6 +453,8 @@ public class AppTest
      * 14.オーバーライド：重寫（Overriding）
      * 15.カプセル化：封裝（Encapsulation）
      * 16.コンストラクタ：構造器（Constructor）
+     * 17.インクリメント：increment（ch04#q08）
+     * 18.エントリーポイント：entry point（ch01#q05）
      * -----------------------
      * TODO 內容還需要補足
      */
