@@ -1,6 +1,7 @@
 package org.example.test_1Z0815.ch12.o1.test1;
 
 public class Children extends Parent{
+
     static {
         System.out.println("Children 靜態代碼塊1");
     }

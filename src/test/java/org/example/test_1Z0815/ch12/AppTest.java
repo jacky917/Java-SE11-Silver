@@ -22,7 +22,7 @@ import java.util.function.*;
  * 需要複習但還沒整理的概念
  * 1.Java的執行順序
  *   1.靜態 Main 方法優先執行
- *   2.靜態成員變量和靜態代碼塊，依照代碼順序執行
+ *   2.靜態成員變量和靜態代碼塊，依照代碼順序執行（如果是賦值操作聲明不需要在前）
  *   3.父類優先於子類初始化
  *   4.非靜態成員變量和非靜態代碼塊優先於構造函數
  *   ----------------------- ch13#78
@@ -75,24 +75,30 @@ public class AppTest
 
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/16
      * 題目考點：命令行編譯
      * 需要補足知識：包的概念
      * 複習：不借助IDE的情況下，編譯並執行q1內容
      * 總結：
-     * 1.包名路徑要寫完整
-     * 2.編譯不帶上包名，會導致使用默認的無包模式，有可能會因此找不到目標class
+     * 1.包名路徑要寫完整。
+     * 2.編譯不帶上包名，會導致使用默認的無包模式，有可能會因此找不到目標class。
+     * 3.在Java 11中，可以直接運行Java源代碼文件，但是這種方式僅用於運行單個源代碼文件。當有多個源代碼文件時，仍然需要首先使用javac來編譯它們。
+     *   原因：
+     *       複雜性：支持多文件可能需要複雜的解析和解析順序決定，這可能會影響Java的運行速度。
+     *       一致性：Java的建模方式是基於先編譯後運行的。直接運行多文件源代碼可能會打破這種一致性，並帶來新的問題。
+     *       模塊和依賴：較大的Java項目通常涉及到多個依賴和模塊。解決這些依賴關係需要更複雜的邏輯，這超出了單文件源代碼執行的範疇。
+     *       已有的建構工具：對於複雜的項目，有許多建構工具，如Maven和Gradle，可以有效地管理依賴和編譯過程。
      */
-    public void test_q1() {
+    public void test_q01() {
 
     }
 
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/16
      * 題目考點：包的導入
      * 需要補足知識：import com.sample.*; 並不能導入子包中的類
      * 複習：查看總結即可
@@ -106,20 +112,20 @@ public class AppTest
      * 以上這種情況Java無法靠著一條import完成需求
      * 只能導入指定的一個類或是一個包下的所有類（不含子包）
      */
-    public void test_q3() {
+    public void test_q03() {
 
     }
 
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/16
      * 題目考點：java.util.function
      * 需要補足知識：java.util.function
-     * 複習：查看 q4
+     * 複習：查看 q04
      * 總結：
      */
-    public void test_q4() {
+    public void test_q04() {
         // －－－－－－－－－－－－－－－－－－題目－－－－－－－－－－－－－－－－－－
         // Supplier不接收參數，但返回一個結果
         // 常量
@@ -158,22 +164,23 @@ public class AppTest
      * }
      * 使用 B 模塊的模塊可以直接訪問 C 模塊
      */
-    public void test_q6() {
+    public void test_q06() {
 
     }
 
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/16
      * 題目考點：switch 用法
      * 需要補足知識：default 不一定要擺最後
      * 複習：查看以下代碼
      * 總結：
      * 1.沒有 break 的話會繼續執行下面的 case 並且不判斷，直到跑完所有 case 或遇到 break
      * 2.default 不一定要擺最後
+     * 3.default 僅允許一個
      */
-    public void test_q7() {
+    public void test_q07() {
         Random rand = new Random();
         int num = rand.nextInt(11);
         System.out.println("num = " + num);
@@ -200,12 +207,25 @@ public class AppTest
                 System.out.print("B");
                 break;
         }
+
+//        switch (num) {
+//            default:
+//                System.out.print("C");
+//            case 0:
+//                System.out.print("A");
+//                break;
+//            case 10:
+//                System.out.print("B");
+//                break;
+//            default:
+//                System.out.print("C");
+//        }
     }
 
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/14
      * 題目考點：Character 常用方法的使用
      * 需要補足知識：Character 常用方法 + 自己擴展了一點其他知識
      * 複習：查看以下代碼
@@ -233,51 +253,52 @@ public class AppTest
      * 10.compare(char x, char y) 靜態方法
      * 按字典順序比較兩個 char 值，根據 x 是否小於、等於或大於 y 來分別返回負整數、零或正整數。
      * 11.對比 Character.isLetter 和 Character.isAlphabetic
-     * 1.接收參數類型不同
-     * 2.Character.isAlphabetic 的範圍比 Character.isLetter 更廣
-     * 3.Character.isAlphabetic 多出了字母數，詳細看代碼演示
+     *  1.接收參數類型不同
+     *  2.Character.isAlphabetic 的範圍比 Character.isLetter 更廣
+     *  3.Character.isAlphabetic 多出了字母數，詳細看代碼演示
      * －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
      * String 常用方法
      * 1.length()
-     * 返回字串的長度。
+         * 返回字串的長度。
      * 2.charAt(int index)
-     * 返回指定位置的字符。
+         * 返回指定位置的字符。
      * 3.substring(int beginIndex)
-     * 從 beginIndex 開始截取字串，返回新的字串。
+         * 從 beginIndex 開始截取字串，返回新的字串。
      * 4.substring(int beginIndex, int endIndex)
-     * 從 beginIndex 開始，到 endIndex（不包含）結束截取字串，返回新的字串。
+         * 從 beginIndex 開始，到 endIndex（不包含）結束截取字串，返回新的字串。
      * 5.contains(CharSequence sequence)
-     * 檢查字串是否包含指定的字符序列。
+         * 檢查字串是否包含指定的字符序列。
+         * CharSequence 是一個接口，子類包含但不限於 String、StringBuilder和StringBuffer
      * 6.indexOf(String str)
-     * 返回指定子字串在此字串中第一次出現處的索引。
+         * 返回指定子字串在此字串中第一次出現處的索引。
      * 7.lastIndexOf(String str)
-     * 返回指定子字串在此字串中最右邊出現處的索引。
+         * 返回指定子字串在此字串中最右邊出現處的索引。
      * 8.startsWith(String prefix)
-     * 檢查字串是否以指定的前綴開始。
+         * 檢查字串是否以指定的前綴開始。
      * 9.endsWith(String suffix)
-     * 檢查字串是否以指定的後綴結束。
+         * 檢查字串是否以指定的後綴結束。
      * 10.toLowerCase()
-     * 將字串轉換為小寫。
+         * 將字串轉換為小寫。
      * 11.toUpperCase()
-     * 將字串轉換為大寫。
+         * 將字串轉換為大寫。
      * 12.trim()
-     * 去除字串兩端的空白字符。
+         * 去除字串兩端的空白字符。
      * 13.replace(CharSequence target, CharSequence replacement)
-     * 替換字串中的某個字符序列。
+         * 替換字串中的某個字符序列。
      * 14.split(String regex)
-     * 根據給定的正則表達式的匹配拆分此字串。
+         * 根據給定的正則表達式的匹配拆分此字串。
      * 15.equals(Object obj)
-     * 比較此字串與指定的物件是否相等。
+         * 比較此字串與指定的物件是否相等。
      * 16.intern()
-     * 返回字串對象的規範化表示（canonical representation）。主要用於節省記憶體
-     * －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+         * 返回字串對象的規範化表示（canonical representation）。主要用於節省記憶體
+         * －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
      * 擴展知識：
      * 1.Character 有 0~127 的緩存（Unicode編碼）範圍是 ASCII
      * 2.Character 要使用緩存必須使用自動裝箱，不能使用 new 關鍵字
      *   Character ch = 'a'
      * 3.Character 沒有類似 String intern 的方法
      */
-    public void test_q8() {
+    public void test_q08() {
         System.out.println("-----總結1-----");
         Character character = new Character('1');
         System.out.println(character.charValue());
@@ -340,6 +361,12 @@ public class AppTest
         System.out.println(s1.intern() == s2.intern()); // true
         System.out.println(s3 == s4); // true
         System.out.println(s1.intern() == s3); // true
+
+        String s5 = "abc";
+        System.out.println("s5 :" + s5.substring(0,3));
+
+        String s6 = "abc";
+        System.out.println("s6 :" + s5.substring(2));
     }
 
     /**
@@ -354,7 +381,7 @@ public class AppTest
      * 1.jdeps --list-deps
      * 2.java --show-module-resolution（Java 9引入）
      */
-    public void test_q9() {
+    public void test_q09() {
 
     }
 
@@ -388,7 +415,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/16
      * 題目考點：switch 使用，String 默認值
      * 需要補足知識：switch 可容許的值
      * 複習：查看以下代碼
@@ -416,16 +443,41 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
+     * 題目考點：命令行
+     * 需要補足知識：-d
+     * 複習：查看總結
+     * 總結：
+     * 1.javac -d 參數代表輸出的目錄
+     * 補充看 q01
+     */
+    public void test_q15() {
+    }
+
+    /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2023/09/16
      * 題目考點：localDate with
      * 需要補足知識：localDate 的使用
-     * 複習：查看 Notion
-     * 總結：-
+     * 複習：補充查看 Notion
+     * 總結：
+     * getDayOfWeek 方法是 java.time 包下 LocalDate, LocalDateTime, 和 ZonedDateTime 等類的一個方法，
+     * 它用來獲得該日期對應的星期幾信息。它返回一個 DayOfWeek 枚舉實例，這個枚舉包含了一周中的每一天（MONDAY, TUESDAY, ...）。
      */
     public void test_q16() {
-
+        switch (1) {
+            case 1:
+                System.out.println("1");
+            case 2:
+                System.out.println("2");
+            case 3:
+                System.out.println("3");
+            case 4:
+                System.out.println("4");
+        }
     }
 
     /**
@@ -463,6 +515,18 @@ public class AppTest
     }
 
     /**
+     * 🌟
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
+     * 題目考點：模塊配置文件
+     * 需要補足知識：mandated
+     * 複習：查看 Notion
+     * 總結：-
+     */
+    public void test_q18() {
+    }
+
+    /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
      * 最後一次查看：2023/07/06
@@ -483,7 +547,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/23
+     * 最後一次查看：2023/09/16
      * 題目考點：繼承，祖父成員變量問題
      * 需要補足知識：祖父成員變量訪問
      * 複習：查看q22
@@ -496,6 +560,7 @@ public class AppTest
      *   super.sample();
      * 4.子類無法直接調用祖父類方法（不管是類或是接口的默認方法）除非父類沒有重寫，
      *   如果有這個需求，需要在父類調用 super
+     * 5.フィールド指的是成員變量
      */
     public void test_q22() {
 
@@ -541,7 +606,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2023/09/16
      * 題目考點：重載的優先調用
      * 需要補足知識：基本數據類型
      * 複習：查看 q27 和總結
@@ -567,22 +632,31 @@ public class AppTest
     public void test_q27() {
         // 因為會產生歧意，編譯器不知道應該要裝箱還是拆箱
         // Q27.test(new Integer(1), 1);
+        // Integer,Integer
         Q27.test(new Integer(1), new Integer(1));
+        // Integer,Integer
         Q27.test(Integer.valueOf(1), Integer.valueOf(1));
+        // int,int
         Q27.test(10, 20);
+        // double,double
         Q27.test(10.0, 20.0);
+        // double,double
+        Q27.test(10.0, 20);
+        // float,float
+        Q27.test(10L, 20L);
     }
 
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2023/09/16
      * 題目考點：Java 模塊
      * 需要補足知識：Java 模塊
      * 複習：查看總結
      * 總結：
+     *   アプリケーションモジュールとJDKのモジュールのリンクが容易に構築できる
      * 1.有了模塊的概念後可以在沒有 JRE 環境的設備上運行 Java 程序，但在模塊概念出現之前也有其他方式，
-     * 如Self-Contained Application（自包含應用程序）和Ahead-of-Time（將 Java 編譯為本地代碼）
+     *  　如Self-Contained Application（自包含應用程序）和Ahead-of-Time（將 Java 編譯為本地代碼）
      * 2.jlink（模塊） vs Self-Contained Application（自包含應用程序）
      * 　・尺寸和精簡度：使用jlink創建的自定義Java運行時環境只包含運行特定Java應用程序所需的模塊，這通常會比一個完整的JRE小很多。
      * 　　這是因為一個完整的JRE包含了所有的Java SE API，而一個具體的Java應用程序可能只使用其中的一部分。
@@ -614,9 +688,9 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2023/09/16
      * 題目考點：重寫
      * 需要補足知識：private方法不可重寫
      * 複習：查看 q35
@@ -630,7 +704,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/13
+     * 最後一次查看：2023/09/16
      * 題目考點：重寫
      * 需要補足知識：只有返回值不同的函數會報錯（因為編譯器會認為是同一個方法）
      * 複習：查看 q41 （因為編譯錯誤所以無法運行）
@@ -668,7 +742,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2023/09/16
      * 題目考點：繼承時，構造器的調用
      * 需要補足知識：沒有明寫的話，默認會調用父類的空參構造器
      * 複習：查看 q44
@@ -696,7 +770,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2023/09/16
      * 題目考點：運算式
      * 需要補足知識：運算式
      * 複習：查看 q49
@@ -715,7 +789,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2023/09/16
      * 題目考點：基本數據類型的計算
      * 需要補足知識：基本數據類型
      * 複習：查看以下代碼
@@ -723,8 +797,11 @@ public class AppTest
      * 1.round 四捨五入，返回的是整數
      * 2.整數除整數，無條件捨去
      * 3.計算時如果有 float 將自動向上轉型
+     * 4.round 只能有一個參數（09/16自己腦補了可以多參數指定四捨五入小數點位數）
+     * 5.有括號先運行，沒括號從左至右
      */
     public void test_53() {
+
         // round 四捨五入
         long g1 = Math.round(10.4);
         long g2 = Math.round(10.5);
@@ -772,8 +849,31 @@ public class AppTest
 
     /**
      * 🌟🌟🌟
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
+     * 題目考點：拋出異常
+     * 需要補足知識：範圍要由小變大
+     * 複習：查看以下代碼
+     * 總結：
+     * 1.RuntimeException 的父類是 Exception
+     * 2.異常抓取範圍要由小變大
+     */
+    public void test_q57() {
+//        try {
+//            throw new Exception();
+//        } catch (Exception e) {
+//            throw new RuntimeException();
+//        } catch (RuntimeException e) {
+//            System.out.println("A");
+//        } finally {
+//            System.out.println("B");
+//        }
+    }
+
+    /**
+     * 🌟🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/07/11
+     * 最後一次查看：2023/09/16
      * 題目考點： + 運算符
      * 需要補足知識：表達式是由左至右運算
      * 複習：查看以下總結和代碼
@@ -789,9 +889,9 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/07/11
+     * 最後一次查看：2023/09/16
      * 題目考點：類型轉換
      * 需要補足知識：類型轉換
      * 複習：查看以下總結和代碼
@@ -808,9 +908,9 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/07/11
+     * 最後一次查看：2023/09/16
      * 題目考點：初始化
      * 需要補足知識：初始化
      * 複習：查看以下總結和代碼
@@ -846,7 +946,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/07/11
+     * 最後一次查看：2023/09/16
      * 題目考點：方法引用（Method Reference）
      * 需要補足知識：
      * 複習：查看 q66
@@ -854,6 +954,27 @@ public class AppTest
      */
     public void test_q66() {
 
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
+     * 題目考點：Java開發環境
+     * 需要補足知識：日文
+     * 複習：查看總結
+     * 總結：
+     * 1.JDKをインストールするときには、特定のオペレーティングシステム用のJava開発環境をセットアップする。⭕
+     * 2.Javaの開発環境をセットアップするにはJREが必要である。❌
+     * 3.JDKよりも前にIDE（統合開発環境）をインストールすれば、Javaの開発環境はセットアップされる。❌
+     * -----------------------
+     * 1.JDK有平台的差別（ＯＳ）
+     * 2.Java JDK包含JRE所以不需要單獨配置JRE（這個一開始誤會題意了，我以為包含所以還是需要JRE）
+     *   從Java11開始不再單獨提供JRE而是將它集成在JDK中。此外，引入了一個新的工具稱為jlink，
+     *   這個工具允許開發者創建自定義的運行時映像，這些映像只包含為應用程序運行所需的模組，這樣可以減少運行時環境的大小。
+     * 3.就算安裝了IDE還是必須配置JDK
+     */
+    public void test_q67() {
     }
 
     /**
@@ -900,6 +1021,23 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
+     * 題目考點：入口函數
+     * 需要補足知識：main
+     * 複習：查看q76
+     * 總結：
+     * 1.入口函數僅有可能是以下兩種，且一個類中不能同時存在，或存在多個
+     *   public static void main(String[] args)
+     *   public static void main(String... args)
+     * 2.定義其他的main方法方法不會報錯，但不能當成入口，如下
+     *   public static void main(Object[] args)
+     */
+    public void test_q76() {
+    }
+
+    /**
      * 🌟🌟🌟
      * 創建日期：2023/07/11
      * 最後一次查看：2023/07/11
@@ -918,8 +1056,33 @@ public class AppTest
 
     /**
      * 🌟🌟🌟
-     * 創建日期：2023/07/11
-     * 最後一次查看：2023/07/11
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
+     * 題目考點：模塊
+     * 需要補足知識：日文
+     * 複習：查看總結
+     * 總結：
+     * 1.コマンドラインからモジュールのエクスポートを設定することはできるが望ましくない。⭕
+     *　　從命令行配置Java模組的導出是可行的，但並不推薦。
+     * 2.Javaの基本APIはjava.baseモジュールにある。⭕
+     *　　Java的基本API位于java.base模块中。
+     * 3.JDKがモジュール化されたため、APIは非推奨になった。❌
+     *　　如第二點所示，模塊化對於API的使用沒有影響。
+     * 4.モジュール式JDKで実行するには、アプリケーションをモジュールとして構造化する必要がある。❌
+     * 　-> 在模塊化的JDK中運行時，"不"需要將應用程序組織成模塊的形式。默認使用無名模塊
+     * 　無名模塊的特性和作用如下：
+     * 　　　兼容性：它為那些還沒有遷移到新模塊系統的類和庫提供了一個場所。這意味著，即使你的代碼庫沒有明確地定義模塊，它仍然可以在Java 9或更高版本中運行。
+     * 　　　無模塊描述文件：無名模塊中的類不是由模塊描述文件（module-info.java）所描述的，它們通常是類路徑上的類。
+     * 　　　對所有模塊可見：無名模塊可以訪問到所有已導出的模塊和包，它實際上有權訪問JDK中所有的公共APIs，而不受模塊系統的封裝和隱藏限制。
+     * 　　　缺少模塊化的好處：雖然無名模塊提供了一種方法來兼容未模塊化的代碼，但這樣做也放棄了模塊化帶來的一些好處，如更好的封裝和依賴管理。
+     */
+    public void test_q79() {
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2023/09/16
+     * 最後一次查看：2023/09/16
      * 題目考點：
      * 需要補足知識：
      * 複習：

@@ -4,12 +4,10 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**
@@ -41,6 +39,30 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟🌟
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
+     * 題目考點：
+     * 需要補足知識：
+     * 複習：
+     * 總結：
+     */
+    public void test_q01() {
+    }
+
+    /**
+     * 🌟
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
+     * 題目考點：Comparable 和 Comparator
+     * 需要補足知識：-
+     * 複習：查看 q03
+     * 總結：-
+     */
+    public void test_q02() {
+    }
+
+    /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/23
      * 最後一次查看：2023/07/23
@@ -59,6 +81,36 @@ public class AppTest
      *   返回負數（-1）代表第一個參數排前面
      */
     public void test_q03() {
+    }
+
+    /**
+     * 🌟🌟🌟🌟
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
+     * 題目考點：Alphabetic
+     * 需要補足知識：-
+     * 複習：查看 ch12#q08
+     * 總結：-
+     */
+    public void test_q04() {
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
+     * 題目考點：LocalDate
+     * 需要補足知識：DateTimeException 屬於非受檢異常
+     * 複習：查看以下代碼
+     * 總結：-
+     */
+    public void test_q05() {
+        // DateTimeException extends RuntimeException
+        try {
+            LocalDate date = LocalDate.of(2015, 0, 1);
+        } catch (DateTimeException e) {
+            System.out.println("DateTimeException extends RuntimeException");
+        }
     }
 
     /**
@@ -95,12 +147,15 @@ public class AppTest
      *   動的な配列として動作する
      * 3.值可以重複
      *   重複した値は扱える
-     * 4.可以在任意位置插入值
+     * 4.非線程安全的
+     * 　　スレッドセーフではない
+     * 5.可以在任意位置插入值
      * 　　値を追加する箇所を制御できる
      * －－－－－－－－－－－－－－－－
      * 補充
      * 5.add index 下標是從 0 開始，0 代表插入到最前面
      *   超出索引則拋出錯誤 java.lang.IndexOutOfBoundsException: Index: 1, Size: 0
+     * 6.線程安全可以使用比如 ConcurrentLinkedQueue 等類取代
      */
     public void test_q07() {
         ArrayList<String> list = new ArrayList<>();
@@ -134,6 +189,18 @@ public class AppTest
         }
     }
 
+    /**
+     * 🌟
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
+     * 題目考點：remove
+     * 需要補足知識：removeIf
+     * 複習：查看 q12
+     * 總結：ArrayList 的 remove 只會刪除第一個元素
+     */
+    public void test_q11() {
+    }
+
     private ArrayList<String> getList(String s){
         System.out.println("－－－－－－－" + s + "－－－－－－－");
         ArrayList<String> list = new ArrayList<>();
@@ -146,7 +213,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/23
-     * 最後一次查看：2023/07/23
+     * 最後一次查看：2023/09/14
      * 題目考點：ArrayList remove
      * 需要補足知識：ArrayList remove
      * 複習：查看總結
@@ -246,7 +313,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/23
-     * 最後一次查看：2023/07/23
+     * 最後一次查看：2023/09/14
      * 題目考點：Arrays 常用 API
      * 需要補足知識：mismatch
      * 複習：Notion
@@ -256,9 +323,31 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟🌟🌟
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
+     * 題目考點：Map
+     * 需要補足知識：Map 可以允許 null key
+     * 複習：查看以下代碼
+     * 總結：
+     * 1.map 可以容許 null key
+     * 2.Integer 默認值是 null，所有引用數據類型都可以是 null
+     */
+    public void test_q19() {
+        HashMap<Integer, String> map = new HashMap<>();
+        map.put(1,null);
+        map.put(2,null);
+        map.put(3,null);
+        map.put(1,"null");
+        System.out.println(map.size()); // 3
+        map.put(null,"");
+        System.out.println(map.size()); // 4
+    }
+
+    /**
      * 🌟🌟🌟
-     * 創建日期：2023/07/23
-     * 最後一次查看：2023/07/23
+     * 創建日期：2023/09/14
+     * 最後一次查看：2023/09/14
      * 題目考點：
      * 需要補足知識：
      * 複習：
