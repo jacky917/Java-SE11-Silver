@@ -86,7 +86,7 @@ public class AppTest
      * 最後一次查看：2023/09/13
      * 題目考點：接口
      * 需要補足知識：-
-     * 複習：查看 ch01#q11
+     * 複習：查看 1Z0816 ch01#q11
      * 總結：-
      */
     public void test_q06() {

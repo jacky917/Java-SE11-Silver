@@ -507,6 +507,7 @@ public class AppTest
      * 16.コンストラクタ：構造器（Constructor）
      * 17.インクリメント：increment（ch04#q08）
      * 18.エントリーポイント：entry point（ch01#q05）
+     * 19.サブタイプ：sub type（ch12#q28）
      * -----------------------
      * TODO 內容還需要補足
      */

@@ -96,6 +96,7 @@ public class AppTest
      * 1.整型（byte, short, int, char）或其對應的包裝類型（Byte, Short, Integer, Character）
      * 2.列舉（enum）
      * 3.字符串（String）Java 7
+     * 4.不能接收null（直接報錯）
      * －－－－－－－－－－－－－－－－
      * 1.switch語句不能接受長整型（long）或其對應的包裝類型（Long）作為參數。
      * 2.switch語句不能接受浮點型（float, double）或其對應的包裝類型（Float, Double）作為參數。

@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Sample sample = new Sample() {
             {
-                System.out.println("Sample block");
+                System.out.println("Sample block2");
             }
 //            public Sample(int i) {
 //                System.out.println("Sample Constructor " + i);

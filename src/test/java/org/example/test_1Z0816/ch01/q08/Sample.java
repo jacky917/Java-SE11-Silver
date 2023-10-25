@@ -4,4 +4,8 @@ public class Sample {
     public Sample() {
         System.out.println("Sample Constructor");
     }
+
+    {
+        System.out.println("Sample block1");
+    }
 }
