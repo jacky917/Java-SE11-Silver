@@ -4,7 +4,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 /**
  * Unit test for simple App.
@@ -117,6 +121,39 @@ public class AppTest
         // identity():
         Function<String, String> identityFunction = Function.identity();
         System.out.println(identityFunction.apply("test"));
+
+    }
+
+    /**
+     * 🌟🌟🌟🌟
+     * 創建日期：2023/08/17
+     * 最後一次查看：2023/08/17
+     * 題目考點：Function
+     * 需要補足知識：Function API
+     * 複習：查看以下代碼
+     * 總結：-
+     */
+    public void test_q10() {
+        Function<Integer,Integer> a = x -> x + 2;
+        Function<Integer,Integer> b = x -> x * 2;
+
+        // 這兩個差別在於執行順序
+        System.out.println(a.compose(b).apply(10));
+        System.out.println(a.andThen(b).apply(10));
+
+        // Function.identity() 提供了一個恆等函數，這意味著這個函數返回其輸入的值。這在函數式編程中非常有用，特別是在流(Stream)操作、函數組合或高階函數等場景中。
+        Function<String, String> id = Function.identity();
+        System.out.println(id.apply("Hello"));  // 输出: Hello
+
+        // 使用場景
+        // 使用collect方法進行分組
+        List<String> items1 = Arrays.asList("apple", "banana", "cherry");
+        System.out.println(items1);
+
+        Function<String,String> test = x -> ("apple".equals(x)) ? "XXXXXX" : x;
+
+        Map<String, List<String>> itemMap = items1.stream().collect(Collectors.groupingBy(Function.identity()));
+        System.out.println(itemMap);
 
     }
 
