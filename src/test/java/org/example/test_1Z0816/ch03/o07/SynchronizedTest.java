@@ -1,5 +1,8 @@
 package org.example.test_1Z0816.ch03.o07;
 
+/**
+ * 賣票系統(synchronized)
+ */
 public class SynchronizedTest {
 
     private static int tickets = 100;
