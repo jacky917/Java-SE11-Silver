@@ -85,7 +85,8 @@ public class AppTest
         // newLine() 方法用於寫入一個系統相關的換行符。
         // 不同操作系統的換行符可能不同（比如 Windows 是 \r\n，而 UNIX/Linux 是 \n）。
         // 使用此方法可以讓你無需關注特定平台的細節，而是根據執行程式的系統自動寫入正確的新行。
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
+        Path pathWithDirAndFilename = Utils.getPathWithDirAndFilename("", "output.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathWithDirAndFilename.toString()))) {
             writer.write("這是第一行。");
             writer.newLine();
             writer.write("這是第二行。");
