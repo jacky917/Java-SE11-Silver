@@ -6,6 +6,12 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class OptionalTest {
+
+    public static String getStr() {
+        System.out.println("這段代碼一定會執行");
+        return "這段代碼一定會執行";
+    }
+
     public static void main(String[] args) {
 
         // 不推薦，會報空指針 java.lang.NullPointerException
@@ -54,5 +60,9 @@ public class OptionalTest {
         },() -> {
             System.out.println("值為空，Runnable 被調用");
         });
+
+        System.out.println("===========");
+        // 不管有沒有值都會執行此 getStr 函數
+        s3.orElse(getStr());
     }
 }
