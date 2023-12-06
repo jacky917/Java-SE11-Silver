@@ -1,0 +1,3 @@
+grant codeBase "file:/path/to/myproject/-" {
+    permission java.io.FilePermission "/path/to/myproject/-", "read,write";
+};
