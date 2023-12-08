@@ -17,9 +17,22 @@ public class Outer {
         }
         private int data;
         void execute() {
-            System.out.println("test");
+            System.out.println("data = " + data);
             // 靜態內部類，只能獲取外部類的靜態成員變量
             // System.out.println(num * data);
+        }
+    }
+
+    public static class Inner2 {
+
+        public Inner2() {
+            System.out.println("Inner2 Constructor");
+        }
+        private int data;
+        void execute() {
+            Inner test = new Inner();
+            test.data = 100;
+            test.execute();
         }
     }
 }
