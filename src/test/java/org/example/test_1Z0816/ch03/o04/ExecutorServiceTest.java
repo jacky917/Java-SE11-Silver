@@ -7,6 +7,8 @@ import java.util.concurrent.*;
  * 第四種開啟多線程的方式，使用線程池
  */
 public class ExecutorServiceTest {
+
+
     public static void main(String[] args) {
 
 
@@ -42,8 +44,8 @@ public class ExecutorServiceTest {
 
 
         // scheduleWithFixedDelay 和 scheduleAtFixedRate 的差別
-        // scheduleWithFixedDelay 用於固定的頻率執行任務（當執行時間超過間隔時間，則會直接執行下次而不等待）
-        // scheduleAtFixedRate 用於固定的延遲時間執行任務（執行完本次才計時下次）
+        // scheduleWithFixedDelay 用於固定的頻率執行任務。 即無論任務執行需要多長時間，都會嘗試在指定的時間間隔後啟動下一次任務執行。
+        // scheduleAtFixedRate 用於固定的頻率執行任務（當執行時間超過間隔時間，則會直接執行下次而不等待）
         ScheduledExecutorService scheduledExecutorService2 = Executors.newScheduledThreadPool(5);
 
         scheduledExecutorService2.scheduleWithFixedDelay(() -> {

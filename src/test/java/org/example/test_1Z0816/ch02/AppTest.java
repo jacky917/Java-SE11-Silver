@@ -63,7 +63,7 @@ public class AppTest
         System.out.println(biFunction.apply(5, 3));  // Output: Result: 8
     }
 
-    /**F
+    /**
      * UnaryOperator<T>:
      * 代表接受一個參數並返回一個相同類型結果的函數。
      * Function<T,T>的特化。
@@ -127,13 +127,23 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/08/17
-     * 最後一次查看：2023/08/17
+     * 最後一次查看：2023/12/08
      * 題目考點：Function
      * 需要補足知識：Function API
      * 複習：查看以下代碼
-     * 總結：-
+     * 總結：
+     * Function<T, R>：
+     *     andThen(Function after)：先執行目前函數，然後執行參數中的函數。
+     *     compose(Function before)：先執行參數中的函數，然後執行目前函數。
+     * Consumer<T>：
+     *     andThen(Consumer after)：建立一個組合的 Consumer，先執行目前 Consumer，然後執行參數中的 Consumer。
+     * Predicate<T>：
+     *     and(Predicate other)：邏輯與。
+     *     or(Predicate other)：邏輯或。
+     *     negate()：邏輯非。
      */
     public void test_q10() {
+
         Function<Integer,Integer> a = x -> x + 2;
         Function<Integer,Integer> b = x -> x * 2;
 

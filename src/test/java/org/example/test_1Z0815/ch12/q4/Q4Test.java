@@ -44,8 +44,10 @@ public class Q4Test extends TestCase {
      * Consumer(消費者) 接口代表一個接收單一輸入參數並且沒有返回值的操作。這個接口包含一個 accept(T t) 方法。
      */
     public void test_Consumer() {
-        Consumer<String> stringConsumer = System.out::println;
-        stringConsumer.accept("Hello, world!"); // 打印 "Hello, world!"
+        Consumer<String> stringConsumer1 = x -> System.out.println("stringConsumer1 " + x);
+        Consumer<String> stringConsumer2 = x -> System.out.println("stringConsumer2 " + x);
+        stringConsumer1.andThen(stringConsumer2).accept("xxx");
+        stringConsumer1.accept("Hello, world!"); // 打印 "Hello, world!"
     }
 
     /**
