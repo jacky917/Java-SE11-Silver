@@ -39,7 +39,7 @@ public class FileTest {
 
         System.out.println("文件路徑: " + filePath);
 
-        // 通過文健路徑創建File對象
+        // 通過文件路徑創建File對象
         File file = new File(filePath + File.separator + "test1.txt");
         creatFile(file);
 
