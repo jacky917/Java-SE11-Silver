@@ -1,6 +1,8 @@
 package org.example.test_1Z0816.ch04.o01;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 import java.util.stream.*;
 
@@ -23,13 +25,25 @@ public class Main {
         // 生成一個從1到5的序列 [1, 2, 3, 4, 5]
         IntStream intStream4 = IntStream.rangeClosed(1, 5);
 
-        // 產生一個無限流，並通過limit()設置大小
+        System.out.println("==============intStream5==============");
+
+        // 產生一個無限流，並通過limit()設置大小 [1, 1, 1, 1, 1]
         IntStream intStream5 = IntStream.generate(() -> 1).limit(5);
 
-        // 產生一個無限序列，並通過limit()設置大小
+        intStream5.forEach((x) -> System.out.print(x + ","));
+        System.out.println();
+
+        System.out.println("==============intStream5==============");
+
+        System.out.println("==============intStream6==============");
+
+        // 產生一個無限序列，並通過limit()設置大小 [0, 1, 2, 3, 4]
         IntStream intStream6 = IntStream.iterate(0, n -> n + 1).limit(5);
 
-        System.out.println("==============================");
+        intStream6.forEach((x) -> System.out.print(x + ","));
+        System.out.println();
+
+        System.out.println("==============intStream6==============");
 
         // 產生對象流
         Stream<Integer> integerStream1 = Stream.of(1, 2, 3, 4, 5);
@@ -81,6 +95,17 @@ public class Main {
         Stream<String> stringStream12 = Stream.of(stringArray); // 創建 Stream<String>
 
         System.out.println("==============================");
+
+        System.out.println("使用 ArrayList<Integer> 創建流");
+
+        ArrayList<Integer> ArrayList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+
+        // 創建基本數據類型流
+        IntStream intStream = ArrayList.stream().mapToInt(Integer::intValue);
+
+        // 創建對象流
+        Stream<Integer> objectStream = ArrayList.stream();
+
 
         Arrays.stream(new int[]{1, 2, 3, 4, 5}).distinct().filter(x -> (x % 2) == 0).forEach(System.out::println);
 //        Arrays.asList(1,2,3,4,5).stream().filter(x -> (x % 2) == 0).forEach(System.out::println);

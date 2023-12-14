@@ -6,7 +6,9 @@ import junit.framework.TestSuite;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,11 +45,14 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/11/12
+     * 最後一次查看：2023/12/13
      * 題目考點：Optional
      * 需要補足知識：flatMap
      * 複習：查看q08
-     * 總結：Optional處理中不應該有null出現，哪怕代碼不會報錯，應當使用Optional.empty()替代
+     * 總結：
+     * 1.Optional 處理中不應該有 null 出現，哪怕代碼不會報錯，應當使用 Optional.empty() 替代。
+     * 2.如果有 null 的情況推薦使用 flatMap，並返回一個 Optional，它會自動扁平化處理，也不會導致嵌套 Optional。
+     * 3.泛型為 Optional<Integer> 使用 map 的話不應該返回 Optional 對象，正確的應該是返回 Integer。
      */
     public void test_q08() {
     }
@@ -55,13 +60,13 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/11/12
+     * 最後一次查看：2023/12/13
      * 題目考點：Stream
      * 需要補足知識：Collectors.groupingBy
      * 複習：查看q10
      * 總結：
-     * 1.Stream 可以做到分組
-     * 2.Stream 不是用來取代 for 的，因為Stream不可修改局部變量
+     * 1.Stream 可以做到分組。
+     * 2.Stream 不是用來取代 for 的，因為Stream不可修改局部變量。
      */
     public void test_q10() {
     }
@@ -74,8 +79,8 @@ public class AppTest
      * 需要補足知識：執行順序
      * 複習：查看總結
      * 總結：
-     * 1.Stream 的執行順序由集合所管理，比如HashSet就無法保證和添加的順序一致
-     * 2.Stream 提供並行流（parallel），無法保證順序
+     * 1.Stream 的執行順序由集合所管理，比如HashSet就無法保證和添加的順序一致。
+     * 2.Stream 提供並行流（parallel），無法保證順序。
      */
     public void test_q12() {
     }
@@ -83,11 +88,11 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/11/12
+     * 最後一次查看：2023/12/13
      * 題目考點：創建並行流
      * 需要補足知識：語法
      * 複習：查看以下代碼
-     * 總結：-
+     * 總結：普通流和並行流返回的對象都是 Stream<String>
      */
     public void test_q13() {
         List<String> myList = Arrays.asList("a", "b", "c", "d");
@@ -98,7 +103,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/11/12
+     * 最後一次查看：2023/12/14
      * 題目考點：findAny,findFirst
      * 需要補足知識：API使用
      * 複習：查看以下代碼
@@ -125,11 +130,30 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟🌟
+     * 創建日期：2023/12/14
+     * 最後一次查看：2023/12/14
+     * 題目考點：Stream Map
+     * 需要補足知識：
+     * 複習：查看以下代碼
+     * 總結：map 接收一個 Function，一般用於轉換數據類型
+     */
+    public void test_q18() {
+        Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8);
+        integerStream.map(new Function<Integer, String>() {
+            @Override
+            public String apply(Integer integer) {
+                return integer + "";
+            }
+        }).forEach(System.out::println);
+    }
+
+    /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/12
      * 最後一次查看：2023/11/12
      * 題目考點：API
-     * 需要補足知識：reduce 返回值，基本類型流，對象流
+     * 需要補足知識：reduce 和 基本類型流，對象流的創建與轉換
      * 複習：查看以下代碼
      * 總結：
      * 1.創建基本類型流：
@@ -179,11 +203,11 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/13
-     * 最後一次查看：2023/11/13
-     * 題目考點：
-     * 需要補足知識：
-     * 複習：
-     * 總結：
+     * 最後一次查看：2023/12/14
+     * 題目考點：Collector 是流的終端操作
+     * 需要補足知識：Collector
+     * 複習：詳細查看 q22
+     * 總結：Collector 接口：java.util.stream.Collector用於合併流元素並建立最終結果。可以建立自訂的Collector來獲得最終結果。
      */
     public void test_q21() {
 
@@ -200,13 +224,32 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/13
-     * 最後一次查看：2023/11/13
+     * 最後一次查看：2023/12/14
      * 題目考點：自定義 Collector
      * 需要補足知識：Collector.of的使用
      * 複習：查看以下代碼
-     * 總結：-
+     * 總結：
+     * Collector接口主要由四個方法組成：
+     *    supplier()    提供者 Supplier<A>      ：提供一個新的可變結果容器。
+     *    accumulator() 累加器 BiConsumer<A, T> ：將新的資料元素加入到結果容器中。
+     *    combiner()    組合器 BinaryOperator<A>：合併兩個結果容器，用於並行執行。
+     *    finisher()    終結者 Function<A, R>   ：在整個收集過程結束時，對結果容器套用最終轉換。
      */
     public void test_q22() {
+
+        // StringJoiner 的使用
+        StringJoiner joiner1 = new StringJoiner(", ");
+        joiner1.add("Java");
+        joiner1.add("Python");
+        joiner1.add("C++");
+        System.out.println(joiner1); // Java, Python, C++
+
+        StringJoiner joiner2 = new StringJoiner("= ");
+        joiner2.add("Java");
+        joiner2.add("Python");
+        joiner2.add("C++");
+        System.out.println(joiner2); // Java= Python= C++
+        System.out.println(joiner1.merge(joiner2));
 
         Stream<String> stream = Stream.of("apple", "banana", "cherry", "date");
 
@@ -226,11 +269,19 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/13
-     * 最後一次查看：2023/11/13
+     * 最後一次查看：2023/12/14
      * 題目考點：groupingBy、summarizingInt
      * 需要補足知識：API的使用
      * 複習：查看以下代碼
-     * 總結：-
+     * 總結：
+     * 1.groupingBy 用於根據某個屬性或條件將流中的元素分組。它位於 java.util.stream.Collectors 類別中，是處理流程時進行分組運算的標準方式。
+     *   重載方法 1:接收一個 Function。
+     *   重載方法 2:接收一個 Function 和 Collector。
+     *   重載方法 3:接收一個 Function,Supplier 和 Collector。
+     * mapFactory 允許使用者提供一個自訂的 Map 實作來儲存分組結果。
+     * 這種方式特別適用於需要特定 Map 實作的情況，如排序的 Map。
+     * 2.summarizingInt 是 Java 中 Collectors 類別的方法，它提供了一種統計整數資料的簡單方式。
+     *   這個方法是 Java 8 引入的，主要用於對 Stream 中的整數資料進行匯總統計，包括計算總數、總和、最小值、最大值以及平均值。
      */
     public void test_q25() {
 
@@ -283,12 +334,12 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/13
-     * 最後一次查看：2023/11/13
+     * 最後一次查看：2023/12/14
      * 題目考點：Collectors API
      * 需要補足知識：partitioningBy
      * 複習：查看以下代碼
-     * 總結：它用來將流中的元素根據一個布林表達式（謂詞）分成兩部分，通常被稱為分區（partitioning）。
-     * 分區是一種特殊的分組，其中每個元素按照布林條件被評估，然後根據布林值為true還是false分到兩個不同的列表。
+     * 總結：partitioningBy 用來將流中的元素根據一個布林表達式（謂詞）分成兩部分，通常被稱為分區（partitioning）。
+     *      分區是一種特殊的分組，其中每個元素按照 boolean 為 true 還是 false 分到兩個不同的列表。
      */
     public void test_q26() {
 
@@ -321,9 +372,9 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟
+     * 🌟🌟🌟
      * 創建日期：2023/11/13
-     * 最後一次查看：2023/11/13
+     * 最後一次查看：2023/12/14
      * 題目考點：流的終止操作
      * 需要補足知識：重複調用終止操作
      * 複習：查看以下代碼
@@ -344,8 +395,8 @@ public class AppTest
 
     /**
      * 🌟🌟🌟
-     * 創建日期：2023/11/13
-     * 最後一次查看：2023/11/13
+     * 創建日期：2023/12/14
+     * 最後一次查看：2023/12/14
      * 題目考點：
      * 需要補足知識：
      * 複習：

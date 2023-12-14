@@ -18,6 +18,12 @@ public class OptionalTest {
         Optional<Integer> c = Optional.of(-1);
         Optional<Integer> d = c.flatMap(price -> calc2(price,3));
         System.out.println(d.isPresent());
+
+        // 題目，不應該返回 Optional<Integer>，如果返回 Optional 應該使用 flatMap
+//        Optional<Integer> a = Optional.of(100);
+//        Optional<Integer> b = a.map(price -> calc2(price, 3));
+//        System.out.println(b.get());
+
     }
 
 //    題目的錯誤代碼
