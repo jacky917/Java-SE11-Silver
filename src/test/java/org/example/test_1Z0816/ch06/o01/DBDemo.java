@@ -26,9 +26,7 @@ public class DBDemo {
     public static boolean creatTable() {
 
         Connection connect = Utils.getConnect();
-
         try (Statement statement = connect.createStatement()) {
-
             // 創建表
             String createTableSQL = "CREATE TABLE IF NOT EXISTS people (" +
                     "id INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -77,6 +75,8 @@ public class DBDemo {
      * executeQuery()：執行查詢資料庫的 SQL 語句，傳回單一 ResultSet 物件。
      * executeUpdate()：執行插入、更新或刪除操作的 SQL 語句，傳回一個整數，表示受影響的行數。
      * execute()：執行任何類型的 SQL 語句。 傳回 boolean 值表示是否回傳 ResultSet。
+     * executeBatch()：對於 PreparedStatement，主要用於當需要多次執行相同的SQL語句，但每次使用不同的參數值時。
+     *                 PreparedStatement 通常會預先編譯SQL語句，從而提高執行效率。
      */
     public static ResultSet selectData(int id) {
         String sql = "SELECT * FROM people WHERE id = (?)";
@@ -118,8 +118,45 @@ public class DBDemo {
 //
 //    }
 
+
+    /**
+     *
+     * 數據庫中定義的儲存過程
+     * CREATE PROCEDURE execute
+     *     @x INT,
+     *     @y INT
+     * AS
+     * BEGIN
+     *     -- 儲存過程的實現邏輯
+     * END
+     * --------------------------
+     * CallableStatement 範例
+     */
+    public static void executeFunc() {
+
+        try {
+            Connection connect = Utils.getConnect();
+
+            // 創建CallableStatement對象
+            CallableStatement stmt = connect.prepareCall("{CALL execute(?, ?)}");
+
+            // 設定輸入參數
+            stmt.setInt(1, 10);  // 假設x的值為10
+            stmt.setInt(2, 20);  // 假設y的值為20
+
+            // 執行儲存過程
+            stmt.execute();
+
+            // 清理資源
+            stmt.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-//        selectData(1);
-        creatTable();
+        selectData(1);
+//        creatTable();
     }
 }
