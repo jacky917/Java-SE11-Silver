@@ -12,7 +12,7 @@ public class Main {
 
     @SuppressWarnings("removal")
     public static void test2() {
-        // 當 @Deprecated(forRemoval = true) 時，使用removal可以編譯錯誤
+        // 當 @Deprecated(forRemoval = true) 時，使用removal可以抑制編譯錯誤
         DeprecatedClass.deprecatedMethod1();
         // 當 @Deprecated 時，使用removal無效果
         DeprecatedClass.deprecatedMethod2();

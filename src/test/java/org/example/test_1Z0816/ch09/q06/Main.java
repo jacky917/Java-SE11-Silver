@@ -1,5 +1,7 @@
 package org.example.test_1Z0816.ch09.q06;
 
+import java.sql.SQLOutput;
+
 public class Main {
     public static void main(String[] args) {
         try (Sample s = new Sample()){
@@ -26,5 +28,13 @@ public class Main {
         System.out.println("-------");
         System.out.println(s.isClosed());
         System.out.println("-------");
+
+//        錯誤
+//        Sample s2 = null;
+//        try (s2 = new Sample()){
+//            System.out.println("try");
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

@@ -50,9 +50,9 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟🌟🌟
      * 創建日期：2023/08/19
-     * 最後一次查看：2023/11/29
+     * 最後一次查看：2023/12/18
      * 題目考點：異常
      * 需要補足知識：日文
      * 複習：查看總結
@@ -73,13 +73,14 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/08/19
-     * 最後一次查看：2023/11/29
+     * 最後一次查看：2023/12/18
      * 題目考點：自定義異常類
      * 需要補足知識：自定義異常類
      * 複習：查看總結
      * 總結：
      * 1.自定義異常可以繼承 Error 也可以繼承 Exception 和 RuntimeException 等等作為父類。
      * 2.但一般只會繼承 Exception（自定義檢查異常） 或 RuntimeException（自定義非檢查異常）。
+     * 3.プログラマー programmer 程序員
      */
     public void test_q03() {
 
@@ -101,13 +102,15 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟🌟🌟
      * 創建日期：2023/08/20
      * 最後一次查看：2023/11/29
      * 題目考點：try-with-resources
      * 需要補足知識：try-with-resources
      * 複習：查看 q06
-     * 總結：try-with-resources 的資源可以在外面聲明。
+     * 總結：
+     * 1.try-with-resources 的資源可以在外面聲明。
+     * 2.不能在外聲明 null，然後（）在內 new。
      */
     public void test_q06() {
     }
@@ -127,13 +130,14 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/11/29
-     * 最後一次查看：2023/11/29
+     * 最後一次查看：2023/12/18
      * 題目考點：try-with-resources 關閉資源發生異常
      * 需要補足知識：執行順序
      * 複習：查看 q09
      * 總結：
      * 在 try 範圍內發生異常的話，會在 catch內容執行前調用釋放資源的 close() 方法
      * 這個時候 close() 方法內發生的異常將會被隱藏，日文叫做「抑制された例外」
+     * 但如果當 try 中沒有拋出異常的話，close() 方法內發生的異常會被正常拋出
      */
     public void test_q09() {
     }
