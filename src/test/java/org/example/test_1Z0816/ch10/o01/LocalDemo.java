@@ -14,6 +14,13 @@ import java.util.Locale;
 public class LocalDemo {
     public static void main(String[] args) throws InterruptedException {
 
+        // 新舊API的替代關係
+        // 代替 Calendar
+        // LocalDate,LocalTime,LocalDateTime,ZoneId,ZoneDateTime
+        // 代替 Date -> Instant
+        // 代替 SimpleDateFormat -> DateTimeFormatter
+        // 其他補充 Period,Duration
+
         // 舊的Java時間處理
         // Calendar 非單例
         Calendar instance1 = Calendar.getInstance();
@@ -50,10 +57,10 @@ public class LocalDemo {
         NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
         NumberFormat percentInstance = NumberFormat.getPercentInstance();
 
-        System.out.println(instance.format(1000.1));
-        System.out.println(integerInstance.format(1000.1));
-        System.out.println(currencyInstance.format(1000.1));
-        System.out.println(percentInstance.format(1000.1));
+        System.out.println(instance.format(1000.1));         // 1,000.1
+        System.out.println(integerInstance.format(1000.1));  // 1,000
+        System.out.println(currencyInstance.format(1000.1)); // ¥1,000
+        System.out.println(percentInstance.format(1000.1));  // 100,010%
 
 
         ZonedDateTime taipeZonedDateTime = localDateTime.atZone(taipeiZoneId);

@@ -149,7 +149,6 @@ public class PropertiesDemo {
             prop.load(input);
             // 獲取屬性值
             Set<String> strings = prop.stringPropertyNames();
-//            Set<Object> objects = prop.keySet();
             for(String key : strings) {
                 String value = prop.getProperty(key);
                 System.out.println(key + ": " + value);
