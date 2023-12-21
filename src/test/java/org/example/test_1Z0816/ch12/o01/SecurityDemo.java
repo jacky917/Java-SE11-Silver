@@ -1,4 +1,8 @@
-package org.example.test_1Z0816.ch12;
+package org.example.test_1Z0816.ch12.o01;
+
+import java.io.FilePermission;
+import java.security.Permission;
+import java.security.Policy;
 
 /**
  *
@@ -33,6 +37,23 @@ package org.example.test_1Z0816.ch12;
  *    類別載入與反射：監控類別的載入以及對反射API的使用。
  *    執行緒操作：管理對執行緒的控制，例如啟動和停止執行緒。
  *    動態程式碼載入：控制類別和程式碼的動態載入。
+ * --------------------
+ *  Java 安全模型
+ *    1.安全管理器（SecurityManager）：SecurityManager 是 Java 安全模型的核心，它決定了應用程式是否有權執行特定的操作。
+ *        這些操作可能涉及檔案系統存取、網路通訊、建立新的類別載入器等。
+ *    2.策略（Policy）：Policy 類別表示 Java 應用程式的安全性原則。 它負責定義應用程式的權限集合，這些權限指定了程式碼可以執行哪些操作。
+ *    3.權限（Permissions）：Java 安全模型使用 java.security.Permission 類別及其子類別來表示權限。每個 Permission 物件代表了進行特定操作的能力。
+ *        權限可以非常具體，例如 FilePermission 允許對特定檔案的讀寫操作，SocketPermission 允許對特定主機和連接埠的網路存取等。
+ *  如何工作
+ *      執行一個操作時，如讀取檔案或開啟網路連接，SecurityManager 會檢查是否有相應的權限。
+ *      SecurityManager 會查詢 Policy，以決定目前執行上下文（例如，執行的程式碼的身分、來源等）是否擁有執行該操作所需的 Permission。
+ *      如果 Policy 表示目前上下文擁有適當的權限，則操作將允許操作。 否則，將會拋出 SecurityException。
+ *  定義權限
+ *      權限通常在策略文件中定義，策略文件是一個特定格式的文件，其中指定了不同代碼來源的權限。
+ *      開發者可以透過編寫自訂的策略文件來精確控制應用程式的安全策略。
+ *  總結
+ *      在 Java 的安全模型中，Policy 定義了一組權限，這些權限代表了可以執行的操作。SecurityManager 根據這些策略來決定是否允許執行特定的操作。
+ *      因此，Permissions 是定義安全性原則的基本構件，而 Policy 則管理這些權限的集合。
  *
  */
 public class SecurityDemo {
@@ -41,6 +62,11 @@ public class SecurityDemo {
         // 1. 建立安全性原則文件：例如 mysecurity.policy。
         // 2. 启用安全管理器：在您的Java程序中，需要设置安全管理器并指定安全策略文件。您可以在程序启动时添。
         System.setProperty("java.security.policy", "path/to/mysecurity.policy");
+
+        // 更新安全策略，增加了靈活性和適應性。如果省略這行代碼，則安全策略將不會根據運行時的更改進行更新，
+        // 而是保持 JVM 啟動時加載的狀態。在需要動態更新安全策略的場合，需要包括這行代碼。
+        Policy.getPolicy().refresh();
+
         System.setSecurityManager(new SecurityManager());
         // 3. 運行程式並測試：
         //    運行您的程序，並測試是否只能存取指定的檔案目錄。 如果程式嘗試存取未授權的文件，將會拋出SecurityException。
@@ -55,5 +81,36 @@ public class SecurityDemo {
         //   效能考慮：因為安全管理器會對所有執行緒的安全敏感操作進行檢查，所以在某些情況下，它可能會對應用程式的效能產生影響。
         //   策略設計：需要仔細設計安全策略，以確保不會意外阻止合法操作或導致程式死鎖。
         //   測試：由於安全管理器的影響是全域性的，因此在實際部署前應該在開發和測試環境中充分測試安全性策略。
+
+
+        // 設置自定義的 SecurityManager
+        System.setSecurityManager(new SecurityManager() {
+            @Override
+            public void checkPermission(Permission perm) {
+                // 檢查是否有文件讀取權限
+                if (perm instanceof FilePermission && "read".equals(perm.getActions())) {
+                    // 如果試圖讀取特定文件，拋出 SecurityException
+                    if (perm.getName().equals("/path/to/forbidden/file.txt")) {
+                        throw new SecurityException("讀取該文件被禁止");
+                    }
+                }
+            }
+        });
+
+        // 嘗試讀取兩個不同的文件
+        readFile("/path/to/allowed/file.txt");
+        readFile("/path/to/forbidden/file.txt");
+    }
+
+    private static void readFile(String filePath) {
+        try {
+            // 模擬文件讀取操作
+            System.out.println("嘗試讀取文件: " + filePath);
+            // 實際的文件讀取邏輯應該放在這裡（例如使用 FileReader）
+
+            System.out.println("文件讀取成功: " + filePath);
+        } catch (SecurityException e) {
+            System.out.println("安全管理器阻止讀取文件: " + filePath);
+        }
     }
 }

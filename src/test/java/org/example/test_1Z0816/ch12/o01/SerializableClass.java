@@ -1,4 +1,4 @@
-package org.example.test_1Z0816.ch12;
+package org.example.test_1Z0816.ch12.o01;
 
 import lombok.Data;
 
