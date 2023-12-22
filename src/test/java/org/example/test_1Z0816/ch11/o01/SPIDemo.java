@@ -1,5 +1,7 @@
 package org.example.test_1Z0816.ch11.o01;
 
+import java.util.ServiceLoader;
+
 /**
  * SPI（Service Provider Interface）是一種Java平台提供的服務發現機制，用於允許服務提供者為介面或抽象類別提供實現，
  *     同時使服務使用者能夠找到並利用這些實作。 這種機制在Java中廣泛用於實現模組化、可插拔的架構，進而提高軟體的可擴充性和可維護性。
@@ -18,4 +20,11 @@ package org.example.test_1Z0816.ch11.o01;
  *    可擴充性：SPI機制讓新增新的服務實作變得簡單，無需修改原系統程式碼。
  */
 public class SPIDemo {
+    public static void main(String[] args) {
+        ServiceLoader<Test> loader = ServiceLoader.load(Test.class);
+        for (Test test : loader) {
+            System.out.println("!");
+            System.out.println(test);
+        }
+    }
 }

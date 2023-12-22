@@ -149,7 +149,7 @@ public class AppTest
      * 　　使用 ServiceLoader 的 load 方法時，需要傳遞一個類別字面量（class literal），也就是服務提供者介面的 Class 物件。
      * 4.クラスファイルをロードするためのクラスである。❌
      * 　　ServiceLoader 不是用來直接載入類別文件的；它是用來載入服務提供者介面（SPI）的實作的。
-     * 　　ServiceLoader 透過尋找 META-INF/services 目錄下的設定檔來決定哪些實作類別需要被載入，然後使用 Java 的類別載入機制來載入這些實作類別。
+     * 　　ServiceLoader 透過 尋找 META-INF/services 目錄下的設定檔來決定哪些實作類別需要被載入，然後使用 Java 的類別載入機制來載入這些實作類別。
      */
     public void test_q07() {
         ServiceLoader<String> loader = ServiceLoader.load(String.class);
