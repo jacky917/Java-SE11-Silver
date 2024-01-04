@@ -5,6 +5,22 @@ import java.util.concurrent.*;
 
 /**
  * 第四種開啟多線程的方式，使用線程池
+ * ---------------------------
+ * ExecutorService 中的 execute 和 submit 方法都用於提交任務以供線程池執行，但它們之間存在一些關鍵差異：
+ *   execute(Runnable command)
+ *   參數：execute 方法接受一個 Runnable 物件作為參數。
+ *   傳回值：此方法沒有傳回值。
+ *   異常處理：如果在任務執行過程中發生異常，這些異常將被傳遞給 UncaughtExceptionHandler，如果沒有設定異常處理器，則異常將被忽略。
+ *   用途：當你不需要任務的結果時，可以使用 execute 方法。 它適用於那些只有副作用（例如，列印日誌、修改共享變數等）的任務。
+ * submit(Callable<T> task) 和 submit(Runnable task)
+ *   參數：submit 方法可以接受 Callable 或 Runnable 物件。 Callable 與 Runnable 不同，它可以傳回結果，並且能拋出檢查型異常。
+ *   傳回值：submit 方法傳回一個 Future 物件。 對於 Callable 任務，Future 用來取得計算結果；對於 Runnable 任務，Future 用來檢查任務是否完成，或等待任務完成。
+ *   例外處理：對於透過 submit 提交的任務，如果任務執行過程中發生異常，則異常將被封裝在傳回的 Future 中。 當呼叫 Future.get() 方法時，可以捕獲這些異常。
+ *   用途：當你需要任務的結果，或需要更細緻地處理任務的完成狀態時，應該使用 submit 方法。
+ * 總結
+ *   使用 execute 當你不需要關心任務的結果，只想在背景執行一些操作。
+ *   使用 submit 當你需要取得任務的結果，或是想要能夠捕捉任務執行過程中的異常。
+ *
  */
 public class ExecutorServiceTest {
 

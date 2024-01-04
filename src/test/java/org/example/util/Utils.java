@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Utils {
 
@@ -34,5 +38,36 @@ public class Utils {
             // 路徑已經存在
             return true;
         }
+    }
+
+    private static final Connection connection;
+
+    static {
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/oracle_certified", "root", "123456");
+
+            PreparedStatement preparedStatement = conn.prepareStatement("SHOW VARIABLES LIKE \"%version%\";");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println("========================================================");
+            while(resultSet.next()) {
+                System.out.printf("%25s | ",resultSet.getObject(1));
+                System.out.println(resultSet.getObject(2));
+            }
+            System.out.println("========================================================");
+
+            System.out.println("Connect Success");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection = conn;
+        }
+    }
+
+    public static Connection getConnect() {
+        return connection;
     }
 }

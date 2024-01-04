@@ -1,6 +1,7 @@
 package org.example.test_1Z0816.ch06.o01;
 
-import org.example.test_1Z0816.ch06.util.Utils;
+
+import org.example.util.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -156,7 +157,7 @@ public class DBDemo {
     }
 
     public static void main(String[] args) {
-        selectData(1);
-//        creatTable();
+//        selectData(1);
+        creatTable();
     }
 }

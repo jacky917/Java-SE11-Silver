@@ -108,15 +108,16 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/11/17
-     * 最後一次查看：2023/12/14
+     * 最後一次查看：2023/12/26
      * 題目考點：Console
      * 需要補足知識：API
      * 複習：查看以下代碼
      * 總結：
      * 1.java.io.Console 類別是 Java 6 引入的實用工具，用於存取與目前 Java 虛擬機器相關聯的控制台裝置。
      *   如果你的程式是從命令列啟動的，而輸入輸出沒有被重新導向到另一個來源或目的地，你就可以使用 Console 類別來與使用者互動。
-     * 2.(誤導選項)CharSequence 是一個通用接口，代表一個可讀的字元序列。這個介面提供了一種統一的方式來存取和操作不同類型的字元序列。
+     * 2.（誤導選項）CharSequence 是一個通用接口，代表一個可讀的字元序列。這個介面提供了一種統一的方式來存取和操作不同類型的字元序列。
      *   它被多個類別實現，包括 String、StringBuilder 和 StringBuffer 等。
+     * 3.（ch13#q18）獲取到的密碼可以正常打印出來。（readPassword）
      */
     public void test_q08() {
         Console console = System.console();
@@ -129,6 +130,8 @@ public class AppTest
 
         // 讀取密碼（不顯示）
         char[] password = console.readPassword("Enter your password: ");
+
+        System.out.println(password);
     }
 
     /**

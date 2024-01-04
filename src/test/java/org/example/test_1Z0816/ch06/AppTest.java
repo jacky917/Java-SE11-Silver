@@ -3,7 +3,7 @@ package org.example.test_1Z0816.ch06;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.example.test_1Z0816.ch06.util.Utils;
+import org.example.util.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
