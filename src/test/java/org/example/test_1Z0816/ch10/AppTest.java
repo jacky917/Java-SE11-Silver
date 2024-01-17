@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import static org.example.test_1Z0816.ch10.o02.PropertiesDemo.stringPropertyNamesDemo;
@@ -119,7 +120,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/18
-     * 最後一次查看：2023/12/18
+     * 最後一次查看：2024/01/11
      * 題目考點：Properties
      * 需要補足知識：API
      * 複習：查看以下代碼
@@ -198,11 +199,74 @@ public class AppTest
     public void test_q11() {
     }
 
+    /**
+     * 🌟🌟🌟🌟
+     * 創建日期：2024/01/11
+     * 最後一次查看：2024/01/11
+     * 題目考點：ResourceBundle
+     * 需要補足知識：讀取順序
+     * 複習：查看總結
+     * 總結：
+     * ResourceBundle 在 Java 中用於載入特定於區域設定的資源，如本地化字串。 當請求一個資源包時，ResourceBundle 會根據一定的優先順序來尋找資源。
+     * 這個查找過程依賴資源包的基本名稱、目標區域設定（Locale），以及可用的資源包檔案。
+     * --------------------------
+     * 資源包的查找順序
+     * -------------
+     * 假設請求的基本名稱為 BaseName，目標區域設定為 Locale(language, country, variant)，資源包的尋找順序如下：
+     * 完全指定的區域設定：
+     *   BaseName_language_country_variant
+     *   如果 Locale 是完全指定的（包含語言、國家和變體），首先會尋找完全匹配的資源包。
+     * 省略變體：
+     *   BaseName_language_country
+     *   如果沒有找到完全符合的資源包，會嘗試尋找省略變體的資源包。
+     * 僅包含語言：
+     *   BaseName_language
+     *   接下來會嘗試尋找只包含語言的資源包。
+     * 只有基本名稱：
+     *   BaseName
+     *   如果以上都沒有找到，會嘗試尋找只有基本名稱的資源包。
+     * 預設區域設定：
+     *   如果指定的 Locale 和預設區域設定不同，則上述步驟會針對預設 Locale 重複一次。
+     * 只有基本名稱的預設資源包：
+     *   最後，如果其他所有嘗試都失敗了，ResourceBundle 會嘗試載入僅基於基本名稱的預設資源包（不包含任何區域設定資訊的資源包）。
+     * 注意事項
+     *   如果在任何階段找到了匹配的資源包，查找過程將停止。
+     *   資源包可以是屬性檔或 Java 類別。
+     *   對於屬性文件，文件名稱應該與上述模式相匹配，如 BaseName_en_US.properties。
+     *   對於 Java 類，類別名稱應該與模式匹配，並且類別應該擴展 ResourceBundle 或其子類別。
+     * 範例
+     *   假設有一個基本名稱為 Messages，區域設定為 Locale("en", "US", "WIN")，查找順序將是：
+     *   Messages_en_US_WIN
+     *   Messages_en_US
+     *   Messages_en
+     *   Messages
+     *   如果預設區域設定不是 en_US，則重複上述步驟，但以預設區域設定為目標。
+     *   最後，嘗試 Messages 作為預設資源包。
+     * 透過這種方式，ResourceBundle 為不同區域設定提供了靈活的資源尋找機制，使得應用程式可以根據使用者的區域設定顯示不同的資源（如文字資訊）。
+     */
+    public void test_q13() {
+    }
 
     /**
      * 🌟🌟🌟
-     * 創建日期：2023/12/18
-     * 最後一次查看：2023/12/18
+     * 創建日期：2024/01/11
+     * 最後一次查看：2024/01/11
+     * 題目考點：ResourceBundle
+     * 需要補足知識：getBundle
+     * 複習：查看以下代碼
+     * 總結：getBundle 有多種構造器，其中常用的兩個是單獨 baseName 和 baseName + locale
+     */
+    public void test_q15() {
+        Locale locale = new Locale("zh", "TW");
+        ResourceBundle messages1 = ResourceBundle.getBundle("Messages", locale);
+        ResourceBundle messages2 = ResourceBundle.getBundle("Messages");
+    }
+
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2024/01/11
+     * 最後一次查看：2024/01/11
      * 題目考點：
      * 需要補足知識：
      * 複習：

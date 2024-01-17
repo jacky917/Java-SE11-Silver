@@ -18,9 +18,9 @@ public class ResourceBundleDemo {
     public static void main(String[] args) {
         // 設定語言和地區
         Locale locale = new Locale("zh", "TW");
-        ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-
+        ResourceBundle messages1 = ResourceBundle.getBundle("Messages", locale);
+        ResourceBundle messages2 = ResourceBundle.getBundle("Messages");
         // 獲取並打印資源
-        System.out.println(messages.getString("greeting"));
+        System.out.println(messages1.getString("greeting"));
     }
 }

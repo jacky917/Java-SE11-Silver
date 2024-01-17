@@ -36,5 +36,18 @@ public class Main {
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
+
+
+        Sample s2 = new Sample();
+        try (s2){
+            System.out.println("try");
+            throw new Exception();
+        } catch (Exception e) {
+            System.out.println("caught Exception");
+        } finally {
+            System.out.println("finally");
+        }
+        // Variable used as a try-with-resources resource should be final or effectively final
+        // s2 = new Sample();
     }
 }

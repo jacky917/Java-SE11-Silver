@@ -73,14 +73,14 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/08/19
-     * 最後一次查看：2023/12/18
+     * 最後一次查看：2024/01/11
      * 題目考點：自定義異常類
      * 需要補足知識：自定義異常類
      * 複習：查看總結
      * 總結：
      * 1.自定義異常可以繼承 Error 也可以繼承 Exception 和 RuntimeException 等等作為父類。
-     * 2.但一般只會繼承 Exception（自定義檢查異常） 或 RuntimeException（自定義非檢查異常）。
-     * 3.プログラマー programmer 程序員
+     *   但一般只會繼承 Exception（自定義檢查異常） 或 RuntimeException（自定義非檢查異常）。
+     * 2.プログラマー programmer 程序員
      */
     public void test_q03() {
 
@@ -89,28 +89,30 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/08/20
-     * 最後一次查看：2023/11/29
+     * 最後一次查看：2024/01/11
      * 題目考點：try-with-resources
      * 需要補足知識：try-with-resources
-     * 複習：1Z0815 ch13#q42，詳細看 Notion
+     * 複習：q05，1Z0815 ch13#q42，詳細看 Notion
      * 總結：
      * 1.AutoCloseable 和 Closeable 都可以用來實現 try-with-resources。
      * 2.AutoCloseable 是 java7 新加入的。
      * 3.AutoCloseable 拋出的異常更加自由（Exception的子類），Closeable 則是 IOException 的子類。
+     * 4.兩個接口需要實現的方法都是 close()
      */
     public void test_q05() {
     }
 
     /**
-     * 🌟🌟🌟🌟
+     * 🌟🌟🌟🌟🌟
      * 創建日期：2023/08/20
-     * 最後一次查看：2023/11/29
+     * 最後一次查看：2024/01/11
      * 題目考點：try-with-resources
      * 需要補足知識：try-with-resources
      * 複習：查看 q06
      * 總結：
      * 1.try-with-resources 的資源可以在外面聲明。
      * 2.不能在外聲明 null，然後（）在內 new。
+     * 3.使用 try-with-resources 關閉資源的對象必須是 final 或是 effectively final。
      */
     public void test_q06() {
     }

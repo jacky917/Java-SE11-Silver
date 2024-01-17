@@ -65,7 +65,7 @@ public class Main {
 
 
         System.out.println("===============まとめ===============");
-        // Stream.of 只能創建對象流，如果需要基本數據流需要轉換
+        // Stream.of 只能創建對象流，如果需要基本數據流需要轉換（基本數據流應使用 IntStream.of 等）
         // Arrays.stream 則可以無需轉換直接獲取基本數據流
 
 

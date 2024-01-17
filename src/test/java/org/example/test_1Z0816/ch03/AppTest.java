@@ -3,6 +3,7 @@ package org.example.test_1Z0816.ch03;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.concurrent.*;
 
@@ -40,6 +41,28 @@ public class AppTest
      * 3.重寫 start 並且調用父類 start 的情況，run 方法的內容會和 start 方法的剩餘內容交錯執行（因爲這是不同的線程）。
      */
     public void test_q01() {
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2024/01/10
+     * 最後一次查看：2024/01/10
+     * 題目考點：ScheduledExecutorService
+     * 需要補足知識：API
+     * 複習：查看以下代碼
+     * 總結：-
+     */
+    public void test_q04() {
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+        try {
+            scheduledExecutorService.schedule(() -> System.out.println("schedule"), 1, TimeUnit.SECONDS);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            scheduledExecutorService.shutdown();
+        }
     }
 
     /**

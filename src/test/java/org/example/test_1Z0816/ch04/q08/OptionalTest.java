@@ -9,14 +9,17 @@ import java.util.Optional;
  */
 public class OptionalTest {
     public static void main(String[] args) {
-        Optional<Integer> a = Optional.of(-1);
+
         // 不推薦的做法
+        Optional<Integer> a = Optional.of(-1);
         Optional<Integer> b = a.map(price -> calc(price, 3));
         // false
         System.out.println(b.isPresent());
+
         // 正確的做法
         Optional<Integer> c = Optional.of(-1);
         Optional<Integer> d = c.flatMap(price -> calc2(price,3));
+        // false
         System.out.println(d.isPresent());
 
         // 題目，不應該返回 Optional<Integer>，如果返回 Optional 應該使用 flatMap
@@ -36,7 +39,7 @@ public class OptionalTest {
 
     private static Integer calc(int price, int qty) {
         if(price < 0) {
-            // 返回 null 將會喪失 Optional 的檢查功能（isPresent = true）
+            // 返回 null 將會喪失 Optional 的檢查功能
             return null;
         }
         return price * qty;

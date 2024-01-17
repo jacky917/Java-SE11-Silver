@@ -9,10 +9,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -21,10 +18,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -71,7 +67,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/22
-     * 最後一次查看：2023/12/22
+     * 最後一次查看：2024/01/11
      * 題目考點：Files
      * 需要補足知識：Files.lines
      * 複習：查看以下代碼
@@ -182,7 +178,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/26
-     * 最後一次查看：2023/12/26
+     * 最後一次查看：2024/01/11
      * 題目考點：機密情報の改ざんを防止する方法
      * 需要補足知識：日語
      * 複習：查看以下總結
@@ -213,12 +209,16 @@ public class AppTest
         System.out.println(now.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale)));
         // 12/26/23
         System.out.println(now.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(locale)));
+        // Thursday, January 11, 2024
+        System.out.println(now.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(locale)));
+        // January 11, 2024
+        System.out.println(now.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(locale)));
     }
 
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/12/26
-     * 最後一次查看：2023/12/26
+     * 最後一次查看：2024/01/12
      * 題目考點：JDBC
      * 需要補足知識：API
      * 複習：查看以下代碼
@@ -342,7 +342,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
+     * 最後一次查看：2024/01/12
      * 題目考點：
      * 需要補足知識：
      * 複習：查看以下代碼 & ch04#o01
@@ -492,7 +492,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
+     * 最後一次查看：2024/01/12
      * 題目考點：模塊
      * 需要補足知識：SPI
      * 複習：查看總結
@@ -510,6 +510,22 @@ public class AppTest
      *    這樣做是為了確保服務提供者模塊可以正確引用並實現那些接口。
      */
     public void test_q31() {
+    }
+
+    /**
+     * 🌟
+     * 創建日期：2024/01/12
+     * 最後一次查看：2024/01/12
+     * 題目考點：流的轉換
+     * 需要補足知識：API
+     * 複習：查看以下代碼
+     * 總結：-
+     */
+    public void test_q32() {
+        Stream<Integer> a = Stream.of(1, 2, 3, 4, 5);
+        IntStream b = a.mapToInt(n -> n);
+        DoubleStream c = b.mapToDouble(n -> n);
+        Stream<Integer> boxed = c.mapToInt(n -> (int) n).boxed();
     }
 
     /**
@@ -569,22 +585,36 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
+     * 最後一次查看：2024/01/12
      * 題目考點：List.copyOf
      * 需要補足知識：API
      * 複習：查看以下代碼
      * 總結：List.copyOf 創建的是一個不可修改的副本，添加元素將會拋出 java.lang.UnsupportedOperationException 異常。
      */
     public void test_q36() {
+        try {
+            ArrayList<Integer> list1 = new ArrayList<>();
+            list1.add(1);
+            list1.add(2);
+            List list2 = List.copyOf(list1);
+            list2.add(3);
+            List<List<Integer>> list3 = List.of(list1, list2);
+            System.out.println(list3);
+        } catch (UnsupportedOperationException e) {
+            e.printStackTrace();
+        }
+        System.out.println("---不報錯寫法---");
         ArrayList<Integer> list1 = new ArrayList<>();
         list1.add(1);
         list1.add(2);
-        List<Integer> list2 = List.copyOf(list1);
+        System.out.println(list1.size());
+        // Collections.nCopies(list1.size(), 0) 創建一個不可變的列表，並塞進 0
+        List<Integer> list2 = new ArrayList<>(Collections.nCopies(list1.size(), 0));
+        Collections.copy(list2,list1);
         list2.add(3);
-        List<List<Integer>> list3 = List.of(list1, list2);
-        System.out.println(list3);
+        System.out.println(list2);
     }
 
     private final ReentrantLock lock = new ReentrantLock();
@@ -639,8 +669,28 @@ public class AppTest
 
     /**
      * 🌟🌟🌟
+     * 創建日期：2024/01/12
+     * 最後一次查看：2024/01/12
+     * 題目考點：List API
+     * 需要補足知識：replaceAll
+     * 複習：查看以下代碼
+     * 總結：List replaceAll 用於對所有元素進行替換
+     */
+    public void test_q44() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        list.replaceAll(new UnaryOperator<Integer>() {
+            @Override
+            public Integer apply(Integer integer) {
+                return integer * 2;
+            }
+        });
+        System.out.println(list);
+    }
+
+    /**
+     * 🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
+     * 最後一次查看：2024/01/12
      * 題目考點：IntStream.generate
      * 需要補足知識：API
      * 複習：查看 ch04#o01
@@ -655,12 +705,12 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
-     * 題目考點：
-     * 需要補足知識：
-     * 複習：
+     * 最後一次查看：2024/01/15
+     * 題目考點：stream
+     * 需要補足知識：API
+     * 複習：查看以下代碼
      * 總結：
-     * 1.Collectors.averagingDouble 可以用來統計平均數。
+     * 1.Collectors.averagingDouble 可以用來統計平均數（統   s計前可以對原資料進行操作）。
      * 2.average API 只有基本數據類型流才有。
      */
     public void test_q46() {
@@ -670,12 +720,25 @@ public class AppTest
         OptionalDouble average = integers.stream().mapToInt(n -> n).average();
 //        System.out.println(average.getAsDouble());
         System.out.println(average.orElse(-1));
+
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5"));
+        Double result = list.stream().collect(Collectors.averagingDouble(new ToDoubleFunction<String>() {
+            @Override
+            public double applyAsDouble(String value) {
+                return Double.parseDouble(value);
+            }
+        }));
+
+        System.out.println(result);
+
+        IntStream intStream = IntStream.of(1, 2, 3, 4, 5);
+        OptionalDouble intAverage = intStream.average();
     }
 
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
+     * 最後一次查看：2024/01/12
      * 題目考點：
      * 需要補足知識：
      * 複習：
@@ -713,7 +776,7 @@ public class AppTest
      * 最後一次查看：2023/12/28
      * 題目考點：Comparator.comparing
      * 需要補足知識：API
-     * 複習：
+     * 複習：查看總結
      * 總結：
      * Comparator.comparing 是 Java 中 Comparator 介面的靜態方法，用於建立比較器，該比較器根據提供的函數對物件的鍵進行比較。
      * 這個方法非常有用，因為它允許您快速建立比較器，特別是在使用 lambda 表達式和方法參考時。
@@ -749,7 +812,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/28
-     * 最後一次查看：2023/12/28
+     * 最後一次查看：2024/01/12
      * 題目考點：無限流
      * 需要補足知識：iterate
      * 複習：查看以下代碼
@@ -848,7 +911,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2024/01/04
-     * 最後一次查看：2024/01/04
+     * 最後一次查看：2024/01/12
      * 題目考點：Locale
      * 需要補足知識：setDefault 的重載
      * 複習：查看 ch10#q01
@@ -861,6 +924,40 @@ public class AppTest
         // 第二種重載方法
         // public static synchronized void setDefault(Locale.Category category, Locale newLocale)
         Locale.setDefault(Locale.Category.DISPLAY, Locale.FRENCH);
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2024/01/12
+     * 最後一次查看：2024/01/12
+     * 題目考點：輸入輸出流
+     * 需要補足知識：所屬包和類型
+     * 複習：查看以下代碼
+     * 總結：-
+     */
+    public void test_q58() {
+        InputStream in = System.in;
+        PrintStream out = System.out;
+    }
+
+    /**
+     * 🌟🌟🌟🌟
+     * 創建日期：2024/01/12
+     * 最後一次查看：2024/01/12
+     * 題目考點：parallelStream
+     * 需要補足知識：API
+     * 複習：查看以下代碼
+     * 總結：parallelStream() + forEach 會導致每次結果都不一樣
+     */
+    public void test_q59() {
+        List<Integer> list1 = List.of(5, 4, 3, 2, 1);
+        list1.stream().forEach(n -> System.out.println(n + " " +Thread.currentThread().getName()));
+        System.out.println("=============");
+        List<Integer> list2 = List.of(5, 4, 3, 2, 1);
+        list2.parallelStream().forEach(n -> System.out.println(n + " " +Thread.currentThread().getName()));
+        System.out.println("=============");
+        List<Integer> list3 = List.of(5, 4, 3, 2, 1);
+        list3.parallelStream().forEachOrdered(n -> System.out.println(n + " " +Thread.currentThread().getName()));
     }
 
     /**
@@ -1037,8 +1134,8 @@ public class AppTest
 
     /**
      * 🌟🌟🌟
-     * 創建日期：2024/01/04
-     * 最後一次查看：2024/01/04
+     * 創建日期：2024/01/12
+     * 最後一次查看：2024/01/12
      * 題目考點：
      * 需要補足知識：
      * 複習：

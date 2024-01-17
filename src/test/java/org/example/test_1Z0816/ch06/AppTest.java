@@ -72,7 +72,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/11/21
-     * 最後一次查看：2023/11/21
+     * 最後一次查看：2024/01/10
      * 題目考點：prepareStatement
      * 需要補足知識：executeUpdate
      * 複習：查看以下代碼
@@ -81,8 +81,8 @@ public class AppTest
     public void test_q10() {
         Connection connect = Utils.getConnect();
         try(PreparedStatement preparedStatement = connect.prepareStatement("DELETE FROM people WHERE id = (?)")) {
-            preparedStatement.setInt(0,5); // 報錯
-            // 這是提供給 Statement（靜態sql） 使用的
+            preparedStatement.setInt(1,5); // 報錯，sql 設值下標從 1 開始
+            // 這是提供給 Statement（靜態sql） 使用的，因爲一般來說 PreparedStatement 需要設置參數
             System.out.println(preparedStatement.executeUpdate("DELETE FROM people WHERE id = (?)"));
         }catch (SQLException e) {
             e.printStackTrace();
@@ -116,13 +116,14 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/15
-     * 最後一次查看：2023/12/15
+     * 最後一次查看：2024/01/12
      * 題目考點：Statement
      * 需要補足知識：executeBatch
      * 複習：查看以下代碼
      * 總結：
      * 1.Statement,PreparedStatement 和 CallableStatement 都有 executeBatch 方法。
      * 2.用於提高數據庫操作效率。
+     * 3.這三個對象用完，都應該手動關閉資源。
      */
     public void test_q13() throws SQLException {
         Connection connect = Utils.getConnect();
@@ -136,7 +137,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/12/15
-     * 最後一次查看：2023/12/15
+     * 最後一次查看：2024/01/10
      * 題目考點：CallableStatement
      * 需要補足知識：儲存過程
      * 複習：查看 o01

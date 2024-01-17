@@ -43,9 +43,31 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟🌟
+     * 創建日期：2024/01/10
+     * 最後一次查看：2024/01/10
+     * 題目考點：ofNullable
+     * 需要補足知識：API
+     * 複習：查看以下代碼
+     * 總結：當值為 null時，調用 optional.get 會報錯，應該使用 isPresent,ifPresent 或者使用 orElse，給定默認值
+     */
+    public void test_q02() {
+        Optional<String> optional = Optional.ofNullable(null);
+        // java.util.NoSuchElementException: No value present
+        System.out.println(optional.get());
+    }
+
+    private static Optional<Integer> calc(int price, int qty) {
+        if(qty < 0) {
+            return Optional.empty();
+        }
+        return Optional.of(price * qty);
+    }
+
+    /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/12/13
+     * 最後一次查看：2023/01/10
      * 題目考點：Optional
      * 需要補足知識：flatMap
      * 複習：查看q08
@@ -53,8 +75,15 @@ public class AppTest
      * 1.Optional 處理中不應該有 null 出現，哪怕代碼不會報錯，應當使用 Optional.empty() 替代。
      * 2.如果有 null 的情況推薦使用 flatMap，並返回一個 Optional，它會自動扁平化處理，也不會導致嵌套 Optional。
      * 3.泛型為 Optional<Integer> 使用 map 的話不應該返回 Optional 對象，正確的應該是返回 Integer。
+     * 4.(題目考點) map 方法應該會傳回轉換後的值而不是 Optional 物件。 題目中 map 方法的 lambda 表達式傳回的是一個 Optional<Integer> 對象，
+     *   這導致了 b 的類型實際上是 Optional<Optional<Integer>>。
      */
     public void test_q08() {
+        Optional<Integer> a = Optional.of(100);
+        // Required : Optional <Integer>
+        // Provided : Optional <Optional<Integer>>
+        // Optional<Integer> b = a.map(price -> calc(price, 3));
+        System.out.println(a.get());
     }
 
     /**
@@ -103,10 +132,10 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/12/14
+     * 最後一次查看：2023/01/10
      * 題目考點：findAny,findFirst
      * 需要補足知識：API使用
-     * 複習：查看以下代碼
+     * 複習：查看總結
      * 總結：
      * 1.findAny返回流中隨機的一個值
      * 2.findFirst返回流中第一個值（不是第一個處理的值）
@@ -117,13 +146,25 @@ public class AppTest
     }
 
     /**
-     * 🌟🌟🌟
+     * 🌟🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/11/12
+     * 最後一次查看：2023/01/10
      * 題目考點：Stream API
      * 需要補足知識：sorted
      * 複習：查看以下代碼
-     * 總結：-
+     * 總結：
+     * sort 方法
+     *   定義：sort 是 List 介面的一個方法。 它用於對 List 實例中的元素進行原地排序，即修改清單本身。
+     *   用法：void sort(Comparator<? super E> c)
+     *        這個方法接受一個 Comparator 物件作為參數，用來定義排序的順序。 如果傳入 null，則使用元素的自然順序。
+     *   特点：此方法会改变原列表的内容，它不会创建列表的副本。
+     * sorted 方法
+     *   定義：sorted 是 Stream 介面的一個方法。 它用於對流中的元素進行排序，產生一個新的排序後的流。
+     * 用法：
+     *   Stream<T> sorted()
+     *   Stream<T> sorted(Comparator<? super T> comparator)
+     *   無參版本依自然順序排序，有參版本接受一個 Comparator。
+     *   特点：sorted 方法不会改变原始数据源（如集合），它会返回一个新的流。
      */
     public void test_q17() {
         Arrays.asList(1, 2, 3).stream().sorted();
@@ -151,7 +192,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/11/12
-     * 最後一次查看：2023/11/12
+     * 最後一次查看：2023/01/10
      * 題目考點：API
      * 需要補足知識：reduce 和 基本類型流，對象流的創建與轉換
      * 複習：查看以下代碼
@@ -162,6 +203,9 @@ public class AppTest
      *   Arrays.asList(1, 2, 3).stream()
      *   -> Arrays.asList創建了List<Integer>對象
      * 3.轉換使用 boxed mapToInt
+     * 4.當使用初始值的 reduce 方法時，無論是在基本資料流或物件流中，都會傳回對應的基本資料類型或泛型物件。
+     *   當使用不含初始值的 reduce 方法時，將傳回 Optional 類型的對象，這適用於基本資料流和物件流。
+     *   這種方式在流為空時提供了更好的處理方式，因為它會傳回一個可以表示空值的 Optional。
      */
     public void test_q19() {
 
