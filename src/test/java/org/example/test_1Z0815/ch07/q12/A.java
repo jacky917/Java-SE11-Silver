@@ -6,4 +6,7 @@ public class A {
     void print() {
         System.out.println(val);
     }
+    void print2() {
+        System.out.println(val);
+    }
 }

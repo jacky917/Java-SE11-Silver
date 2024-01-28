@@ -6,17 +6,17 @@ public class Main {
 
         // 題目
         // Variable 'val' is already defined in the scope
-        // Consumer c = (val) -> {
-        //     System.out.println(val);
-        // };
+//         Consumer c1 = (val) -> {
+//             System.out.println(val);
+//         };
 
         // 補充
         // 可以直接使用val，查看 ch12#q04
-        Consumer c = (a) -> {
+        Consumer c2 = (a) -> {
             System.out.println(a);
             System.out.println(val);
         };
 
-        c.test("x");
+        c2.test("x");
     }
 }

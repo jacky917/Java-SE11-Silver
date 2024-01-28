@@ -8,5 +8,7 @@ public class Main {
         System.out.println(b.val);
         a.print();
         b.print();
+        a.print2();
+        b.print2();
     }
 }

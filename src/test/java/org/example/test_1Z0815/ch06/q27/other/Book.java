@@ -5,7 +5,12 @@ public class Book {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
     protected void printInfo() {
-        System.out.println(isbn);
+        System.out.println("isbn = " + isbn);
     }
 }

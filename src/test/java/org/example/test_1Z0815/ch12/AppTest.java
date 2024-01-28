@@ -9,10 +9,14 @@ import org.example.test_1Z0815.ch12.q43.B;
 import org.example.test_1Z0815.ch12.q49.Sample;
 import org.example.test_1Z0815.ch12.q10.test1.C;
 
+import java.sql.SQLOutput;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.*;
+
+import static java.time.DayOfWeek.*;
 
 /**
  * 🌟
@@ -77,14 +81,17 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：命令行編譯
      * 需要補足知識：包的概念
      * 複習：不借助IDE的情況下，編譯並執行q1內容
      * 總結：
      * 1.包名路徑要寫完整。
      * 2.編譯不帶上包名，會導致使用默認的無包模式，有可能會因此找不到目標class。
-     * 3.在Java 11中，可以直接運行Java源代碼文件，但是這種方式僅用於運行單個源代碼文件。當有多個源代碼文件時，仍然需要首先使用javac來編譯它們。
+     * 3.Java 編譯器 javac 在編譯一個檔案時，會檢查該檔案所依賴的所有其他類別。 如果這些依賴類別還沒有被編譯（即不存在相應的 .class 檔案），
+     *   編譯器將嘗試找到這些類別的原始程式碼（.java 檔案）並一起編譯它們。不過，這種自動解析依賴的行為可能受到諸如類路徑配置等因素的影響。
+     *   如果編譯器無法正確定位 .java 文件，它可能無法編譯這個類，從而導致編譯錯誤。
+     * 4.在Java 11中，可以直接運行Java源代碼文件，但是這種方式僅用於運行單個源代碼文件。當有多個源代碼文件時，仍然需要首先使用javac來編譯它們。
      *   原因：
      *       複雜性：支持多文件可能需要複雜的解析和解析順序決定，這可能會影響Java的運行速度。
      *       一致性：Java的建模方式是基於先編譯後運行的。直接運行多文件源代碼可能會打破這種一致性，並帶來新的問題。
@@ -147,9 +154,21 @@ public class AppTest
     }
 
     /**
+     * 🌟🌟
+     * 創建日期：2024/01/27
+     * 最後一次查看：2024/01/27
+     * 題目考點：宣告
+     * 需要補足知識：就近原則
+     * 複習：查看 q05
+     * 總結：有靜態成員變量的情況下也可以重複申明局部變量，取值採就近原則
+     */
+    public void test_q05() {
+    }
+
+    /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2024/01/27
      * 題目考點：模塊 module-info.java
      * 需要補足知識：如下
      * 複習：查看總結
@@ -171,7 +190,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：switch 用法
      * 需要補足知識：default 不一定要擺最後
      * 複習：查看以下代碼
@@ -225,7 +244,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/09/14
+     * 最後一次查看：2024/01/27
      * 題目考點：Character 常用方法的使用
      * 需要補足知識：Character 常用方法 + 自己擴展了一點其他知識
      * 複習：查看以下代碼
@@ -367,12 +386,13 @@ public class AppTest
 
         String s6 = "abc";
         System.out.println("s6 :" + s5.substring(2));
+
     }
 
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2024/01/27
      * 題目考點：指令相關
      * 需要補足知識：
      * 複習：要展開內容太多，先記答案
@@ -415,7 +435,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：switch 使用，String 默認值
      * 需要補足知識：switch 可容許的值
      * 複習：查看以下代碼
@@ -445,7 +465,7 @@ public class AppTest
     /**
      * 🌟🌟
      * 創建日期：2023/09/16
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：命令行
      * 需要補足知識：-d
      * 複習：查看總結
@@ -459,24 +479,27 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：localDate with
      * 需要補足知識：localDate 的使用
      * 複習：補充查看 Notion
      * 總結：
-     * getDayOfWeek 方法是 java.time 包下 LocalDate, LocalDateTime, 和 ZonedDateTime 等類的一個方法，
-     * 它用來獲得該日期對應的星期幾信息。它返回一個 DayOfWeek 枚舉實例，這個枚舉包含了一周中的每一天（MONDAY, TUESDAY, ...）。
+     * 1.getDayOfWeek 方法是 java.time 包下 LocalDate, LocalDateTime, 和 ZonedDateTime 等類的一個方法，
+     *   它用來獲得該日期對應的星期幾信息。它返回一個 DayOfWeek 枚舉實例，這個枚舉包含了一周中的每一天（MONDAY, TUESDAY, ...）。
+     * 2.FRIDAY:只是一個 label。
      */
     public void test_q16() {
-        switch (1) {
-            case 1:
-                System.out.println("1");
-            case 2:
-                System.out.println("2");
-            case 3:
-                System.out.println("3");
-            case 4:
-                System.out.println("4");
+//        DayOfWeek today = LocalDate.now().with(TUESDAY).getDayOfWeek();
+        DayOfWeek today = LocalDate.now().with(MONDAY).getDayOfWeek();
+        switch (today) {
+            case SUNDAY:
+            case SATURDAY:
+                System.out.println("weekend");
+                break;
+            case MONDAY:
+                FRIDAY:System.out.println("working");
+            default:
+                System.out.println("other");
         }
     }
 
@@ -530,7 +553,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/06
-     * 最後一次查看：2023/07/06
+     * 最後一次查看：2024/01/27
      * 題目考點：多維陣列的初期化
      * 需要補足知識：語法
      * 複習：查看以下代碼還有 Notion
@@ -540,6 +563,8 @@ public class AppTest
         int[][] staticArray = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         int[][] dynamicArray1 = new int[3][3];
         int[][] dynamicArray2 = new int[3][];
+        // 報錯
+        // int[][] dynamicArray2 = new int[][3];
         dynamicArray2[0] = new int[3];
         dynamicArray2[1] = new int[2];
         dynamicArray2[2] = new int[1];
@@ -548,7 +573,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：繼承，祖父成員變量問題
      * 需要補足知識：祖父成員變量訪問
      * 複習：查看q22
@@ -588,7 +613,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/28
+     * 最後一次查看：2024/01/27
      * 題目考點：多實現
      * 需要補足知識：多實現，且有擁有相同方法名時，需要指定使用的默認接口方法
      * 複習：查看q24
@@ -597,6 +622,7 @@ public class AppTest
      * 1.super 關鍵字用於訪問父類（超類）的方法和屬性。但是在接口的情況下，Java不允許直接使用 super 關鍵字來訪問默認方法，
      *   因為一個類可能實現了多個接口，而這些接口可能有相同的默認方法，直接使用 super 將引發歧義。所以，Java語言的設計者們選擇禁止這種用法。
      * 2.哪怕接口中同樣的默認的方法只有一個，也不能直接透過 super 調用
+     * 3.子接口可以重寫父接口的默認方法 @Override
      * -----------補充-----------
      * 1.接口中的 default 不能直接透過類調用，類只能直接調用 static 方法
      */
@@ -607,7 +633,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：重載的優先調用
      * 需要補足知識：基本數據類型
      * 複習：查看 q27 和總結
@@ -650,24 +676,25 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：Java 模塊
      * 需要補足知識：Java 模塊
      * 複習：查看總結
      * 總結：
-     *   アプリケーションモジュールとJDKのモジュールのリンクが容易に構築できる
-     * 1.有了模塊的概念後可以在沒有 JRE 環境的設備上運行 Java 程序，但在模塊概念出現之前也有其他方式，
-     *  　如Self-Contained Application（自包含應用程序）和Ahead-of-Time（將 Java 編譯為本地代碼）
-     * 2.jlink（模塊） vs Self-Contained Application（自包含應用程序）
-     * 　・尺寸和精簡度：使用jlink創建的自定義Java運行時環境只包含運行特定Java應用程序所需的模塊，這通常會比一個完整的JRE小很多。
-     * 　　這是因為一個完整的JRE包含了所有的Java SE API，而一個具體的Java應用程序可能只使用其中的一部分。
-     * 　　而一個Self-Contained Application會將完整的JRE打包進應用程序，因此可能會比使用jlink創建的自定義運行時環境大。
-     * 　・跨平台性：使用jlink創建的自定義運行時環境是平台特定的，也就是說你需要為每個目標平台（例如Windows、Linux、macOS）分別創建一個運行時環境。
-     * 　　而一個Self-Contained Application可以是跨平台的，這意味著你可以創建一個應用程序包，它可以在多個平台上運行。
-     * 　・Java版本要求：jlink是在Java 9中引入的，所以只有Java 9及以上版本才支持創建自定義運行時環境。
-     * 　　而Self-Contained Application功能在Java 7就已經提供，因此在舊版本的Java中可能是唯一的選擇。
-     * -----------------------
-     * TODO 內容還需要補足
+     * モジュールかする理由：
+     *   アプリケーションモジュールとJDKのモジュールのリンクが容易に構築できる。⭕
+     * 　　　1.有了模塊的概念後可以在沒有 JRE 環境的設備上運行 Java 程序，但在模塊概念出現之前也有其他方式，
+     *  　　　　如Self-Contained Application（自包含應用程序）和Ahead-of-Time（將 Java 編譯為本地代碼）
+     * 　　　2.jlink（模塊） vs Self-Contained Application（自包含應用程序）
+     * 　　　　・尺寸和精簡度：使用jlink創建的自定義Java運行時環境只包含運行特定Java應用程序所需的模塊，這通常會比一個完整的JRE小很多。
+     * 　　　　　這是因為一個完整的JRE包含了所有的Java SE API，而一個具體的Java應用程序可能只使用其中的一部分。
+     * 　　　　　而一個Self-Contained Application會將完整的JRE打包進應用程序，因此可能會比使用jlink創建的自定義運行時環境大。
+     * 　　　　・跨平台性：使用jlink創建的自定義運行時環境是平台特定的，也就是說你需要為每個目標平台（例如Windows、Linux、macOS）分別創建一個運行時環境。
+     * 　　　　　而一個Self-Contained Application可以是跨平台的，這意味著你可以創建一個應用程序包，它可以在多個平台上運行。
+     * 　　　　・Java版本要求：jlink是在Java 9中引入的，所以只有Java 9及以上版本才支持創建自定義運行時環境。
+     * 　　　　　而Self-Contained Application功能在Java 7就已經提供，因此在舊版本的Java中可能是唯一的選擇。
+     *   アプリケーションの堅牢性が向上する。❌
+     *  　　 堅牢性とは、エラーになるような操作や事態が発生しても、ユーザーに影響を与えない能力のことです。モジュールの課題ではなく、アプリケーションの非機能要件の課題です。
      */
     public void test_q29() {
     }
@@ -675,7 +702,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/07/10
+     * 最後一次查看：2024/01/27
      * 題目考點：List.of，Arrays.asList，ArrayList
      * 需要補足知識：
      * 複習：查看 q33
@@ -691,7 +718,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：重寫
      * 需要補足知識：private方法不可重寫
      * 複習：查看 q35
@@ -705,7 +732,7 @@ public class AppTest
     /**
      * 🌟🌟🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：重寫
      * 需要補足知識：只有返回值不同的函數會報錯（因為編譯器會認為是同一個方法）
      * 複習：查看 q41 （因為編譯錯誤所以無法運行）
@@ -743,15 +770,27 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：繼承時，構造器的調用
      * 需要補足知識：沒有明寫的話，默認會調用父類的空參構造器
      * 複習：查看 q44
      * 總結：
-     * 1.構造器默認會調用父類的空參構造器
+     * 1.構造器默認會調用父類的空參構造器，題目中父類沒有定義導致編譯錯誤。
      * 2.構造器內 super 和 this 只能擇一（必須位於構造器的第一行）
      */
     public void test_q44() {
+    }
+
+    /**
+     * 🌟🌟🌟
+     * 創建日期：2024/01/27
+     * 最後一次查看：2024/01/27
+     * 題目考點：實現
+     * 需要補足知識：抽象類實現接口
+     * 複習：查看 q45
+     * 總結：抽象類實現接口可以不需要有方法體
+     */
+    public void test_q45() {
     }
 
     /**
@@ -771,7 +810,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：運算式
      * 需要補足知識：運算式
      * 複習：查看 q49
@@ -790,7 +829,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/10
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：基本數據類型的計算
      * 需要補足知識：基本數據類型
      * 複習：查看以下代碼
@@ -892,7 +931,7 @@ public class AppTest
     /**
      * 🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：類型轉換
      * 需要補足知識：類型轉換
      * 複習：查看以下總結和代碼
@@ -911,7 +950,7 @@ public class AppTest
     /**
      * 🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：初始化
      * 需要補足知識：初始化
      * 複習：查看以下總結和代碼
@@ -960,7 +999,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/09/16
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：Java開發環境
      * 需要補足知識：日文
      * 複習：查看總結
@@ -1008,7 +1047,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/07/11
-     * 最後一次查看：2023/07/11
+     * 最後一次查看：2024/01/27
      * 題目考點：StringBuilder API 使用
      * 需要補足知識：replace，indexOf
      * 複習：查看以下代碼
@@ -1019,6 +1058,26 @@ public class AppTest
         // start包含，end不包含
         builder.replace(1,2,"X");
         System.out.println(builder);
+    }
+
+    /**
+     * 🌟🌟
+     * 創建日期：2024/01/27
+     * 最後一次查看：2024/01/27
+     * 題目考點：創建數組
+     * 需要補足知識：初始值
+     * 複習：查看以下代碼
+     * 總結：創建新數組，對象的話默認是 null，int 是 0。
+     */
+    public void test_q74() {
+        String[] str = new String[2];
+        int[] ints = new int[2];
+        for (String s : str) {
+            System.out.println(s);
+        }
+        for (int i : ints) {
+            System.out.println(i);
+        }
     }
 
     /**
@@ -1058,7 +1117,7 @@ public class AppTest
     /**
      * 🌟🌟🌟
      * 創建日期：2023/09/16
-     * 最後一次查看：2023/09/16
+     * 最後一次查看：2024/01/27
      * 題目考點：模塊
      * 需要補足知識：日文
      * 複習：查看總結
@@ -1082,8 +1141,8 @@ public class AppTest
 
     /**
      * 🌟🌟🌟
-     * 創建日期：2023/09/16
-     * 最後一次查看：2023/09/16
+     * 創建日期：2024/01/27
+     * 最後一次查看：2024/01/27
      * 題目考點：
      * 需要補足知識：
      * 複習：
