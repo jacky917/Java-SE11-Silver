@@ -98,13 +98,13 @@ public class Main {
 
         System.out.println("使用 ArrayList<Integer> 創建流");
 
-        ArrayList<Integer> ArrayList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
 
         // 創建基本數據類型流
-        IntStream intStream = ArrayList.stream().mapToInt(Integer::intValue);
+        IntStream intStream = arrayList.stream().mapToInt(Integer::intValue);
 
         // 創建對象流
-        Stream<Integer> objectStream = ArrayList.stream();
+        Stream<Integer> objectStream = arrayList.stream();
 
 
         Arrays.stream(new int[]{1, 2, 3, 4, 5}).distinct().filter(x -> (x % 2) == 0).forEach(System.out::println);
